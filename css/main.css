@@ -1,0 +1,981 @@
+/* ============================================================
+   NOVA HORIZONTE TOURS — main.css
+   ARF-Grid Mobile-First | WCAG 2.1 | Dark/Light Mode
+   Prohibido !important | Prohibido anchos fijos en px
+   ============================================================ */
+
+/* ── 1. DESIGN TOKENS ────────────────────────────────────── */
+:root {
+  --nh-bg:        #0B0C10;
+  --nh-surface:   #1F2833;
+  --nh-accent:    #00E5FF;
+  --nh-accent-dim:#00b8cc;
+  --nh-text:      #FAFAFA;
+  --nh-text-muted:#9EA8B3;
+  --nh-border:    rgba(0,229,255,.15);
+  --nh-glow:      0 0 24px rgba(0,229,255,.35);
+  --nh-glow-sm:   0 0 10px rgba(0,229,255,.25);
+  --nh-radius:    14px;
+  --nh-radius-sm: 8px;
+  --nh-transition:all .3s cubic-bezier(.4,0,.2,1);
+  --nh-font:      'Inter', 'Segoe UI', system-ui, sans-serif;
+  --nh-font-display: 'Playfair Display', Georgia, serif;
+  --nav-h:        64px;
+}
+
+/* Light mode overrides */
+[data-theme="light"] {
+  --nh-bg:        #F0F4F8;
+  --nh-surface:   #FFFFFF;
+  --nh-text:      #0B0C10;
+  --nh-text-muted:#4A5568;
+  --nh-border:    rgba(0,229,255,.25);
+  --nh-glow:      0 0 24px rgba(0,180,200,.25);
+}
+
+/* ── 2. RESET & BASE ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--nh-font);
+  background-color: var(--nh-bg);
+  color: var(--nh-text);
+  transition: background-color .4s ease, color .4s ease;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a   { color: var(--nh-accent); text-decoration: none; transition: var(--nh-transition); }
+a:hover { color: var(--nh-accent-dim); }
+
+/* ── 3. TYPOGRAPHY ───────────────────────────────────────── */
+.nh-display {
+  font-family: var(--nh-font-display);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+
+.nh-eyebrow {
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--nh-accent);
+}
+
+/* ── 4. SCROLLBAR ────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--nh-bg); }
+::-webkit-scrollbar-thumb { background: var(--nh-accent-dim); border-radius: 99px; }
+
+/* ── 5. NAVBAR ───────────────────────────────────────────── */
+#nh-navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  background: rgba(11,12,16,.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--nh-border);
+  z-index: 1000;
+  transition: var(--nh-transition);
+}
+
+[data-theme="light"] #nh-navbar {
+  background: rgba(240,244,248,.88);
+}
+
+.nh-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.nh-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+/* Icon button base */
+.nh-icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--nh-border);
+  background: var(--nh-surface);
+  color: var(--nh-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--nh-transition);
+  font-size: .8rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.nh-icon-btn:hover,
+.nh-icon-btn.active {
+  border-color: var(--nh-accent);
+  box-shadow: var(--nh-glow-sm);
+  color: var(--nh-accent);
+}
+
+/* Language pill */
+.nh-lang-btn {
+  width: auto;
+  padding: 0 .75rem;
+  border-radius: 99px;
+  font-size: .7rem;
+  letter-spacing: .08em;
+}
+
+/* Hamburger */
+.nh-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nh-hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--nh-text);
+  border-radius: 2px;
+  transition: var(--nh-transition);
+  transform-origin: center;
+}
+
+.nh-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nh-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nh-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile drawer */
+#nh-drawer {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0; right: 0;
+  background: rgba(11,12,16,.97);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--nh-border);
+  padding: 1.5rem 1.25rem 2rem;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  transform: translateY(-110%);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+}
+
+[data-theme="light"] #nh-drawer { background: rgba(240,244,248,.97); }
+
+#nh-drawer.open { transform: translateY(0); }
+
+.nh-drawer-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--nh-text);
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--nh-border);
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  transition: var(--nh-transition);
+}
+
+.nh-drawer-link:hover { color: var(--nh-accent); padding-left: .5rem; }
+.nh-drawer-link svg  { flex-shrink: 0; }
+
+/* Desktop nav links (hidden < 768px) */
+.nh-nav-links {
+  display: none;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nh-nav-links a {
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--nh-text-muted);
+  letter-spacing: .03em;
+}
+
+.nh-nav-links a:hover { color: var(--nh-accent); }
+
+@media (min-width: 768px) {
+  .nh-nav-links { display: flex; }
+  .nh-hamburger { display: none; }
+}
+
+/* ── 6. HERO ─────────────────────────────────────────────── */
+#nh-hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--nav-h) + 2rem) 1.25rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.nh-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(0,229,255,.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,229,255,.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.nh-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: rgba(0,229,255,.08);
+  border: 1px solid var(--nh-border);
+  border-radius: 99px;
+  padding: .35rem .9rem;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--nh-accent);
+  margin-bottom: 1.5rem;
+}
+
+.nh-hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--nh-accent);
+  animation: nh-pulse 2s ease infinite;
+}
+
+.nh-hero-title {
+  font-size: clamp(2rem, 8vw, 4.5rem);
+  margin-bottom: 1.25rem;
+  max-width: 18ch;
+}
+
+.nh-hero-title .accent { color: var(--nh-accent); }
+
+.nh-hero-sub {
+  font-size: clamp(.9rem, 2.5vw, 1.1rem);
+  color: var(--nh-text-muted);
+  max-width: 46ch;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+.nh-hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+/* ── 7. BUTTONS ──────────────────────────────────────────── */
+.nh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .75rem 1.6rem;
+  border-radius: 99px;
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  cursor: pointer;
+  transition: var(--nh-transition);
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.nh-btn-primary {
+  background: var(--nh-accent);
+  color: #0B0C10;
+  border-color: var(--nh-accent);
+}
+
+.nh-btn-primary:hover {
+  background: transparent;
+  color: var(--nh-accent);
+  box-shadow: var(--nh-glow);
+}
+
+.nh-btn-ghost {
+  background: transparent;
+  color: var(--nh-text);
+  border-color: var(--nh-border);
+}
+
+.nh-btn-ghost:hover {
+  border-color: var(--nh-accent);
+  color: var(--nh-accent);
+  box-shadow: var(--nh-glow-sm);
+}
+
+/* ── 8. CONCIERGE NOVA BAR ───────────────────────────────── */
+#nh-nova-bar {
+  width: min(92%, 680px);
+  margin: 0 auto;
+  position: relative;
+}
+
+.nh-nova-container {
+  background: var(--nh-surface);
+  border: 1px solid var(--nh-border);
+  border-radius: var(--nh-radius);
+  padding: 1rem 1rem 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  box-shadow: var(--nh-glow-sm);
+  transition: var(--nh-transition);
+}
+
+.nh-nova-container:focus-within {
+  border-color: var(--nh-accent);
+  box-shadow: var(--nh-glow);
+}
+
+.nh-nova-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--nh-accent), #0088aa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nh-nova-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: .95rem;
+  color: var(--nh-text);
+  font-family: var(--nh-font);
+  min-width: 0;
+}
+
+.nh-nova-input::placeholder { color: var(--nh-text-muted); }
+
+.nh-voice-btn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--nh-border);
+  background: var(--nh-bg);
+  color: var(--nh-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--nh-transition);
+}
+
+.nh-voice-btn:hover { border-color: var(--nh-accent); color: var(--nh-accent); }
+
+.nh-voice-btn.listening {
+  border-color: var(--nh-accent);
+  color: var(--nh-accent);
+  animation: nh-ring 1.2s ease infinite;
+}
+
+.nh-nova-send {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--nh-accent);
+  border: none;
+  color: #0B0C10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--nh-transition);
+}
+
+.nh-nova-send:hover {
+  background: var(--nh-accent-dim);
+  box-shadow: var(--nh-glow-sm);
+}
+
+/* Nova typing suggestions */
+.nh-nova-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+  margin-top: .75rem;
+}
+
+.nh-nova-chip {
+  font-size: .72rem;
+  padding: .35rem .8rem;
+  border-radius: 99px;
+  border: 1px solid var(--nh-border);
+  background: var(--nh-surface);
+  color: var(--nh-text-muted);
+  cursor: pointer;
+  transition: var(--nh-transition);
+  white-space: nowrap;
+}
+
+.nh-nova-chip:hover {
+  border-color: var(--nh-accent);
+  color: var(--nh-accent);
+}
+
+/* Nova response bubble */
+#nh-nova-response {
+  width: min(92%, 680px);
+  margin: .75rem auto 0;
+  background: var(--nh-surface);
+  border: 1px solid var(--nh-accent);
+  border-radius: var(--nh-radius);
+  padding: 1rem 1.25rem;
+  font-size: .88rem;
+  line-height: 1.6;
+  display: none;
+  animation: nh-fadeup .3s ease;
+}
+
+#nh-nova-response.visible { display: block; }
+
+.nh-nova-response-header {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: .5rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--nh-accent);
+}
+
+/* ── 9. SECTION BASE ─────────────────────────────────────── */
+.nh-section {
+  padding: 5rem 1.25rem 4rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.nh-section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.nh-section-title {
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  margin: .5rem 0 1rem;
+}
+
+.nh-section-desc {
+  font-size: .95rem;
+  color: var(--nh-text-muted);
+  max-width: 50ch;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── 10. ARF-GRID — SERVICE CARDS ────────────────────────── */
+.nh-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.nh-card {
+  flex: 1 1 min(100%, 320px);
+  max-width: 380px;
+  background: var(--nh-surface);
+  border: 1px solid var(--nh-border);
+  border-radius: var(--nh-radius);
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--nh-transition);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.nh-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--nh-accent);
+  box-shadow: var(--nh-glow);
+}
+
+.nh-card-media {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--nh-surface) 0%, #0d1117 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.nh-card-media-icon {
+  font-size: 3.5rem;
+  opacity: .6;
+  transition: var(--nh-transition);
+}
+
+.nh-card:hover .nh-card-media-icon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.nh-card-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(11,12,16,.9) 100%);
+}
+
+.nh-card-tier {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .25rem .6rem;
+  border-radius: 99px;
+  background: rgba(0,229,255,.12);
+  border: 1px solid var(--nh-accent);
+  color: var(--nh-accent);
+}
+
+.nh-card-body {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.nh-card-label {
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--nh-accent);
+  margin-bottom: .4rem;
+}
+
+.nh-card-title {
+  font-family: var(--nh-font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: .6rem;
+  line-height: 1.3;
+}
+
+.nh-card-desc {
+  font-size: .82rem;
+  color: var(--nh-text-muted);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.nh-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: .75rem;
+  border-top: 1px solid var(--nh-border);
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+.nh-card-upsell-count {
+  font-size: .72rem;
+  color: var(--nh-text-muted);
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.nh-card-cta {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--nh-accent);
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  transition: var(--nh-transition);
+}
+
+.nh-card:hover .nh-card-cta { gap: .55rem; }
+
+/* ── 11. SIGNATURE DETAIL BANNER ─────────────────────────── */
+#nh-signature {
+  background: linear-gradient(135deg, rgba(0,229,255,.06) 0%, transparent 60%);
+  border-top: 1px solid var(--nh-border);
+  border-bottom: 1px solid var(--nh-border);
+  padding: 3rem 1.25rem;
+  text-align: center;
+}
+
+.nh-signature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem 2.5rem;
+  max-width: 900px;
+  margin: 2rem auto 0;
+}
+
+.nh-signature-item {
+  flex: 1 1 min(45%, 180px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  font-size: .82rem;
+  color: var(--nh-text-muted);
+  text-align: center;
+}
+
+.nh-signature-item span:first-child {
+  font-size: 1.8rem;
+}
+
+/* ── 12. TRUST STRIP ─────────────────────────────────────── */
+#nh-trust {
+  padding: 2.5rem 1.25rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.nh-trust-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.nh-trust-pill {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--nh-surface);
+  border: 1px solid var(--nh-border);
+  border-radius: 99px;
+  padding: .5rem 1.1rem;
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--nh-text-muted);
+  white-space: nowrap;
+}
+
+.nh-trust-pill svg { flex-shrink: 0; color: var(--nh-accent); }
+
+/* ── 13. MODAL ───────────────────────────────────────────── */
+.nh-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+.nh-modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nh-modal {
+  background: var(--nh-surface);
+  border: 1px solid var(--nh-border);
+  border-radius: var(--nh-radius) var(--nh-radius) 0 0;
+  width: min(100%, 680px);
+  max-height: 90svh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+
+.nh-modal-overlay.open .nh-modal {
+  transform: translateY(0);
+}
+
+@media (min-width: 640px) {
+  .nh-modal-overlay { align-items: center; }
+  .nh-modal {
+    border-radius: var(--nh-radius);
+    max-height: 85svh;
+    transform: translateY(20px) scale(.97);
+  }
+  .nh-modal-overlay.open .nh-modal { transform: translateY(0) scale(1); }
+}
+
+.nh-modal-handle {
+  width: 40px; height: 4px;
+  background: var(--nh-border);
+  border-radius: 99px;
+  margin: .75rem auto .25rem;
+}
+
+@media (min-width: 640px) { .nh-modal-handle { display: none; } }
+
+.nh-modal-header {
+  padding: 1.25rem 1.5rem 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nh-modal-header-info { flex: 1; }
+
+.nh-modal-close {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--nh-border);
+  background: var(--nh-bg);
+  color: var(--nh-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--nh-transition);
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+
+.nh-modal-close:hover { border-color: var(--nh-accent); color: var(--nh-accent); }
+
+.nh-modal-body { padding: 1.25rem 1.5rem 2rem; }
+
+.nh-modal-desc {
+  font-size: .9rem;
+  line-height: 1.75;
+  color: var(--nh-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.nh-modal-upsells-title {
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--nh-accent);
+  margin-bottom: .75rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.nh-upsell-list {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  margin-bottom: 1.75rem;
+}
+
+.nh-upsell-item {
+  background: var(--nh-bg);
+  border: 1px solid var(--nh-border);
+  border-radius: var(--nh-radius-sm);
+  padding: .85rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  transition: var(--nh-transition);
+}
+
+.nh-upsell-item:hover { border-color: var(--nh-accent); }
+
+.nh-upsell-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: .1rem;
+}
+
+.nh-upsell-content { flex: 1; }
+.nh-upsell-name {
+  font-size: .85rem;
+  font-weight: 600;
+  margin-bottom: .2rem;
+}
+.nh-upsell-desc {
+  font-size: .78rem;
+  color: var(--nh-text-muted);
+  line-height: 1.5;
+}
+
+.nh-modal-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.nh-modal-cta-row .nh-btn { flex: 1 1 min(40%, 160px); justify-content: center; }
+
+/* ── 14. FOOTER ──────────────────────────────────────────── */
+#nh-footer {
+  background: var(--nh-surface);
+  border-top: 1px solid var(--nh-border);
+  padding: 3rem 1.25rem 2rem;
+  text-align: center;
+}
+
+.nh-footer-logo {
+  height: 36px;
+  margin: 0 auto 1.25rem;
+}
+
+.nh-footer-tagline {
+  font-family: var(--nh-font-display);
+  font-size: 1rem;
+  color: var(--nh-text-muted);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.nh-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem 1.5rem;
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.nh-footer-links a {
+  font-size: .78rem;
+  color: var(--nh-text-muted);
+  transition: var(--nh-transition);
+}
+
+.nh-footer-links a:hover { color: var(--nh-accent); }
+
+.nh-footer-security {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .7rem;
+  color: var(--nh-text-muted);
+  padding: .5rem 1.1rem;
+  border: 1px solid var(--nh-border);
+  border-radius: 99px;
+  margin-bottom: 1.5rem;
+}
+
+.nh-footer-security svg { color: var(--nh-accent); flex-shrink: 0; }
+
+.nh-footer-copy {
+  font-size: .72rem;
+  color: var(--nh-text-muted);
+  line-height: 1.7;
+}
+
+/* ── 15. ANIMATIONS ──────────────────────────────────────── */
+@keyframes nh-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(.8); }
+}
+
+@keyframes nh-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(0,229,255,.5); }
+  70%  { box-shadow: 0 0 0 10px rgba(0,229,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,229,255,0); }
+}
+
+@keyframes nh-fadeup {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nh-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* Scroll reveal */
+.nh-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.nh-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays */
+.nh-reveal[data-delay="1"] { transition-delay: .1s; }
+.nh-reveal[data-delay="2"] { transition-delay: .2s; }
+.nh-reveal[data-delay="3"] { transition-delay: .3s; }
+.nh-reveal[data-delay="4"] { transition-delay: .4s; }
+.nh-reveal[data-delay="5"] { transition-delay: .5s; }
+.nh-reveal[data-delay="6"] { transition-delay: .6s; }
+
+/* ── 16. RESPONSIVE BREAKPOINTS ──────────────────────────── */
+@media (min-width: 480px) {
+  .nh-card { flex-basis: min(calc(50% - .625rem), 320px); }
+}
+
+@media (min-width: 900px) {
+  .nh-card { flex-basis: min(calc(33.333% - .84rem), 380px); }
+}
+
+@media (min-width: 1200px) {
+  .nh-section { padding: 6rem 2rem 5rem; }
+}
+
+/* ── 17. UTILITY ─────────────────────────────────────────── */
+.nh-visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.nh-divider {
+  border: none;
+  border-top: 1px solid var(--nh-border);
+  margin: 0;
+}

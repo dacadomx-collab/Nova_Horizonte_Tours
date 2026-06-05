@@ -1,0 +1,115 @@
+## FASE 1: FUNDACIÓN DE MARCA Y NEGOCIO (ADN NOVA HORIZONTE)
+
+La identidad de la plataforma operada por Gladys y David es innegociable y actúa como la base lógica y visual del sistema. 
+
+**1. Promesa Central:** 
+"Cero estrés. Control absoluto. Experiencias impecables en tierra, mar y cielo". El cliente no compra actividades, compra tranquilidad.
+
+**2. Sistema Visual Estricto (Mobile-First y Modo Oscuro Nativo):**
+*   **Fondo Principal:** `#0B0C10` (Negro Mate).
+*   **Acento/CTAs:** `#00E5FF` (Azul Eléctrico).
+*   **Superficies/Tarjetas:** `#1F2833` (Gris Grafito).
+*   **Textos:** `#FAFAFA` (Blanco Nieve).
+
+**3. Vocabulario Controlado (Regla de Oro en Frontend y Prompts):**
+*   **Prohibido usar:** "tours", "ayudamos", "organizamos", "compartido".
+*   **Obligatorio usar:** "experiencia privada", "nos encargamos", "coordinamos", "acceso exclusivo".
+
+---
+
+## FASE 2: ARQUITECTURA TDTM (Three-Layer Deep Tech Matrix)
+
+La estructura del software se divide en tres capas de alta disponibilidad:
+
+1.  **Capa 1: Showcase de Ultra-Lujo Responsivo.** Catálogo 100% público e indexable, diseñado para conversión inmediata en móviles (Mobile-First).
+2.  **Capa 2: Nexo Cognitivo.** Asimilación del catálogo asistido por el **Concierge Virtual Nova** (Asistente Inteligente Nova). Procesamiento de perfiles y orquestación logística (Servicios A-G, como *Oceanic Command™* y *TerraLink Executive™*) con ejecución de upsells automatizados (Chef Cognitivo, Fast Track Inteligente, Amenidades Biorresponsivas).
+3.  **Capa 3: Sales Copilot (Dashboard B2B).** Interfaz exclusiva para Gladys y David. Anticipa cuellos de botella y automatiza contratos PDF e ingresos en MariaDB.
+
+---
+
+## FASE 3: BLINDAJE DE INFRAESTRUCTURA (PRE-CODE PROTOCOLS)
+
+Antes de escribir la primera línea de código de interfaz, el sistema exige la "Fundación de Seguridad" (Seguridad Avanzada de Grado Bancario):
+
+*   **Bóveda de Secretos:** Creación obligatoria de `.env` (cifrado local) y `.env.example`.
+*   **Aislamiento de Entornos:** Separación total de bases de datos entre Local, Staging y Producción.
+*   **Caja Negra Forense y Auth Real:** Las modificaciones a DB exigen JWT (no basta con CORS). Los errores en producción de PHP/PDO (ej. MySQL) se capturan en bloque `try/catch` y se mandan a `error.log`, ocultando fallos fatales al cliente para mantener la "Degradación Controlada".
+
+---
+
+## FASE 4: PROMPTS MAESTROS PARA IDE (Cursor / VS Code)
+
+Copia y pega los siguientes prompts directamente en tu agente local (Cursor, Cline, o VS Code Copilot) para ejecutar el desarrollo paso a paso bajo la ley suprema.
+
+### PROMPT MAESTRO 1: FUNDACIÓN DE INFRAESTRUCTURA (Pre-Code & Backend Setup)
+```text
+Eres el Agente Ejecutor Autónomo de Nova Horizonte Tours. Actúa bajo el protocolo "Seguridad Avanzada de Grado Bancario". Tu primera tarea es la Fundación del Proyecto.
+
+EJECUCIÓN DETERMINÍSTICA:
+1. Crea el archivo `.env` vacío y `.env.example` con las variables: DB_HOST, DB_NAME, DB_USER, DB_PASS, JWT_SECRET, STRIPE_SECRET.
+2. Crea `.gitignore` para bloquear `.env`, `node_modules/`, `vendor/` y `error.log`.
+3. Crea `.htaccess` en la raíz para denegar el acceso a archivos `.env` y carpetas ocultas.
+4. Crea `api/conexion.php` implementando PDO estricto. Toda excepción debe silenciarse hacia el cliente y guardarse en `error.log` usando try/catch.
+5. Crea `CLAUDE.md` donde registrarás las reglas de Naming: `snake_case` estricto para Backend y MariaDB.
+
+REGLA INMUTABLE: No inventes nada. Revisa el protocolo y genera solo el código solicitado. Ejecuta Auto-Auditoría al terminar.
+```
+
+### PROMPT MAESTRO 2: INGESTA DE BASE DE DATOS Y CONTRATO API
+```text
+Eres el Agente Ejecutor Autónomo. Procede con la Fase B: Ingesta/DB bajo el "Naming Registry".
+
+EJECUCIÓN DETERMINÍSTICA:
+1. Crea el script SQL para la tabla `services`. Debes usar EXACTAMENTE esta estructura:
+   `id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY`
+   `uuid CHAR(36) NOT NULL UNIQUE`
+   `category ENUM('maritime', 'ground_logistics', 'nature', 'equestrian', 'cultural', 'concierge') NOT NULL`
+   `vip_level ENUM('standard_vip', 'elite', 'black') NOT NULL DEFAULT 'standard_vip'`
+   `service_name VARCHAR(255) NOT NULL`
+   `slug VARCHAR(255) NOT NULL UNIQUE`
+   `short_pitch TEXT NOT NULL`
+   `critical_problem TEXT NOT NULL`
+   `ai_brain_description LONGTEXT NOT NULL`
+   `friction_zero_flow LONGTEXT NOT NULL`
+   `upsell_logic LONGTEXT NOT NULL`
+   `badges JSON NULL`
+   `base_price DECIMAL(12,2) NOT NULL`
+   `dynamic_price_enabled BOOLEAN DEFAULT TRUE`
+   `active BOOLEAN DEFAULT TRUE`
+   `featured BOOLEAN DEFAULT FALSE`
+   `max_capacity INT NULL`
+   `estimated_duration_minutes INT NULL`
+   `geo_zone VARCHAR(255) NULL`
+   `climate_dependency BOOLEAN DEFAULT FALSE`
+   `requires_manual_approval BOOLEAN DEFAULT FALSE`
+   `signature_detail_enabled BOOLEAN DEFAULT TRUE`
+   `booking_buffer_minutes INT DEFAULT 120`
+   `inventory_atomic_lock BOOLEAN DEFAULT TRUE`
+   `ai_predictive_matching BOOLEAN DEFAULT TRUE`
+   `voice_nlp_enabled BOOLEAN DEFAULT TRUE`
+   `realtime_tracking_enabled BOOLEAN DEFAULT TRUE`
+   `created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP`
+   `updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`
+2. Genera un endpoint `api/get_services.php` que retorne los datos bajo el contrato estricto JSON UTF-8. 
+
+REGLA INMUTABLE: No agregues, quites, ni traduzcas ninguna columna. Realiza la Auto-Auditoría de consistencia de variables (snake_case) antes de la entrega.
+```
+
+### PROMPT MAESTRO 3: SHOWCASE DE ULTRA-LUJO RESPONSIVO (Frontend UI)
+```text
+Eres el Agente Ejecutor Autónomo. Procede con la Capa 1: Showcase de Ultra-Lujo Responsivo.
+
+EJECUCIÓN DETERMINÍSTICA:
+1. Desarrolla la Landing Page pública en React/Next.js bajo la regla "Mobile-First" (Cero anchos fijos en px).
+2. Implementa Modo Oscuro Nativo utilizando estrictamente la paleta de diseño:
+   - Fondo: #0B0C10
+   - Acento/Botones: #00E5FF
+   - Superficies/Cards: #1F2833
+   - Texto: #FAFAFA
+3. Utiliza la nomenclatura `camelCase` para todas las variables del frontend.
+4. En la interfaz, utiliza el "Vocabulario Controlado" de Gladys y David: NO uses las palabras "tours" o "ayudamos". REEMPLAZA por "experiencia privada" y "nos encargamos".
+5. Integra una tarjeta visual conectada al endpoint `get_services` que muestre el servicio (ej. "Oceanic Command™").
+6. El Asistente IA visible en el frontend debe llamarse exclusivamente "Concierge Virtual Nova" (Prohibido mencionar AXON_DCD en el lado del cliente).
+
+REGLA INMUTABLE: Ejecuta el Post-Code Check. Detecta y elimina todo "Dead Code" (imports huérfanos o variables no utilizadas) antes de confirmar el hito.
+```

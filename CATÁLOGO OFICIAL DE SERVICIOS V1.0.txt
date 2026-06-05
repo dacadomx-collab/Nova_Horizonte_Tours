@@ -1,0 +1,25 @@
+﻿CATÁLOGO OFICIAL DE SERVICIOS V1.0
+Nova Horizonte Tours 
+Fecha: 3 Abril 2026
+Ubicación Base: La Paz, Baja California Sur (con miras a expansión Nacional). Estructura de Base de Datos: Columna category en la tabla services. 
+Estructura de Niveles VIP: ['standard_vip', 'elite', 'black'].
+A. Expediciones Marítimas Premium (Embarcaciones, Snorkel y Buceo)
+* Descripción: Exploraciones privadas en el Mar de Cortés para clientes que buscan belleza natural con ejecución impecable. Acceso a Isla Espíritu Santo y encuentros controlados con fauna. Flota de alto nivel, protocolos estrictos y equipo sanitizado.
+* Upsells VIP: Chef privado a bordo con menú maridado / Fotógrafo profesional con entrega tipo editorial.
+B. Logística Terrestre VIP (Transporte Privado)
+* Descripción: Movilidad de alto nivel para garantizar fluidez, discreción y puntualidad. Desde recepción personalizada (Meet & Greet) hasta chofer privado. Vehículos climatizados y conectividad total.
+* Upsells VIP: Fast-track aeroportuario y asistencia de equipaje / Amenidades personalizadas (fragancia signature de la empresa, bebidas premium).
+C. Exploración y Naturaleza (Senderismo y Turismo Local)
+* Descripción: Acceso curado a los paisajes más impactantes de BCS. Rutas guiadas exclusivas (miradores, playas vírgenes) con guías expertos y equipamiento de alto rendimiento.
+* Upsells VIP: Picnic de lujo escenográfico en locaciones secretas / Tracking y soporte satelital en tiempo real.
+D. Rutas Ecuestres de Lujo (Cabalgatas Exclusivas)
+* Descripción: Conexión elegante con el entorno. Recorridos privados al atardecer en playa o desierto, priorizando la seguridad y el ritmo del cliente.
+* Upsells VIP: Sesión fotográfica cinematográfica / Cierre con wine tasting privado en la naturaleza.
+E. Herencia Cultural (Pueblos Mágicos y Experiencias Locales)
+* Descripción: Inmersión cultural privada en Todos Santos y El Triunfo. Itinerarios a medida con gastronomía de autor y acceso a la historia local sin fricción logística.
+* Upsells VIP: Acceso privado a galerías y artistas / Reservaciones "off-menu" en restaurantes clave.
+F. Concierge & Eventos Exclusivos ("Nosotros lo resolvemos todo")
+* Descripción: El núcleo de Nova Horizonte. Producción y ejecución con precisión absoluta para eventos en yates, playas o locaciones privadas. El cliente define la visión; nosotros operamos la realidad.
+* Upsells VIP: Diseño de "Signature Experience" (evento único no replicable) / Curaduría musical y entretenimiento premium.
+G. Detalle de Firma (Signature Detail) Aplicable a TODO:
+* Toalla fría aromatizada y bebida de bienvenida consistente en el momento en que el cliente hace contacto físico con nuestro personal (ya sea en el aeropuerto, el yate o la van).

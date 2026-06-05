@@ -1,0 +1,39 @@
+name: 🚀 Pipeline CI/CD - Nova Horizonte Tours
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  production-deploy:
+    name: Despliegue de Ultra-Lujo (Fricción Cero)
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Extracción de Código Fuente
+        uses: actions/checkout@v4
+
+      - name: 🔒 Sincronización Blindada vía FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          # Dirección de impacto directo en el File Manager asignado
+          server-dir: public_html/nova/
+          # Exclusión explícita de archivos locales, gobernanza y datos sensibles
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            knowledge/**
+            CORE/.env
+            CORE/.env.example
+            logs/**
+            z/node_modules/**
+            z/.next/**
+            z/out/**
+            CLAUDE.md
+            README.md
+            *.sql

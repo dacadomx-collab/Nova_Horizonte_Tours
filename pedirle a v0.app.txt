@@ -1,0 +1,18 @@
+
+
+
+Por otra parte . . . Vamos a usar nuestros grandes amigos de https://v0.app
+
+PAra que nos ayude a crear toda la interface completa de lo que ocupamos, por lo tanto . . . . 
+
+Aqui te dejo las instrucciones de que es lo que va hacer nuestrso sistema amigo: para que me ayudes a generar el prompt para nuestros amigos de /v0.app:
+
+
+
+"Nuestra pagina web sera 100% resposiva enfocada principalemente para su funcionalidad de celulares, con medidas de seguridad anti hack y sus funciones seran las siguientes:
+
+1.) va a empzar con el cuadro de recibir instruccones de voz o de escritura (que estara escuchando y leyendo la IA) la que tenemos en el chatbot y que trabajamos ya con la IA )
+
+las instrucicones de voz o de audio que reciba . . .  estaran comandado por un documento que sera la verdad absoluta.
+
+2.- Tambien tendra la opcion que minimizarla o quitarla y ver el menu, este menu sera muy facil de leer en el celular con las opciones visibles y elegantes para elegir: 

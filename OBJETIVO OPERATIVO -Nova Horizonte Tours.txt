@@ -1,0 +1,121 @@
+﻿OBJETIVO OPERATIVO
+Nova Horizonte Tours
+
+
+1. OBJETIVO OPERATIVO Y ESENCIA DE MARCA
+Contexto: Nova Horizonte Tours opera como una infraestructura de logística y hospitalidad de ultra-lujo, liderada por Gladys y David bajo un modelo de equidad de equipo. Su promesa inquebrantable es garantizar "cero estrés" y otorgar a los clientes un control absoluto en experiencias ejecutadas con precisión matemática en mar, tierra y aire. No es una agencia tradicional, sino un sistema determinístico enfocado en un mercado premium y extranjero.
+UI Mobile-First (Contraste WCAG 2.1): Todo el sistema se diseña estrictamente para dispositivos móviles (cero anchos fijos), implementando la siguiente paleta de poder silencioso:
+* Fondo: #0B0C10 (Negro Mate).
+* Acento/CTAs: #00E5FF (Azul Eléctrico).
+* Tarjetas/Superficies: #1F2833 (Gris Grafito).
+* Texto: #FAFAFA (Blanco Nieve).
+Vocabulario Controlado (Regla Estricta): El sistema comunicacional vende exclusividad y tranquilidad, aplicando las siguientes reglas de nomenclatura inmutables:
+* Prohibidos: "tours", "ayudamos", "organizamos", "compartido".
+* Obligatorios: "experiencia privada", "nos encargamos", "coordinamos", "acceso exclusivo".
+🏗️ 2. ARQUITECTURA TDTM (THREE-LAYER DEEP TECH MATRIX)
+La plataforma opera bajo una separación estricta de responsabilidades (TDTM) para garantizar "fricción cero":
+1. Capa 1 (Showcase de Ultra-Lujo Responsivo): Catálogo 100% público, indexable y diseñado para la conversión inmediata en dispositivos móviles. Cualquier usuario global puede visualizar, cotizar y adquirir los servicios transaccionales directamente desde el primer segundo. Interfaz con diseño oscuro (Next.js/Vercel) enfocada en la exclusividad absoluta y accesibilidad comercial directa.
+2. Capa 2 (Nexo Cognitivo): Integración del catálogo asimilado por el Concierge Virtual Nova (Asistente Inteligente Nova), impulsado internamente por motores de ingeniería avanzada. Este asistente ejecuta la lectura de IP, clima, hora e idioma del cliente en <800ms. Procesa entradas por voz o texto mediante NLP, integrando meticulosamente los servicios A-G y sus upsells automatizados:
+* A. Oceanic Command™ (Expediciones Marítimas): Coordina embarcaciones premium mediante bloques atómicos, analizando oleaje y clima. Upsells VIP: Chef Privado Cognitivo (menú maridado según clima) y Fotografía Editorial Automatizada.
+* B. TerraLink Executive™ (Logística Terrestre): Movilidad predictiva que monitorea vuelos en tiempo real. Upsells VIP: Fast Track Inteligente y Amenidades Biorresponsivas (fragancia signature y temperatura).
+* C. Terra Essence™ (Exploración y Naturaleza): Evalúa la densidad turística para asegurar ventanas climáticas óptimas y privacidad. Upsells VIP: Picnic Escenográfico IA y Soporte Satelital Inteligente.
+* D. Equestrian Horizon™ (Rutas Ecuestres): Matching predictivo entre guía, caballo, experiencia del usuario y nivel solar. Upsells VIP: Fotografía Cinemática IA y Wine Tasting Inteligente (etiquetas y temperatura adaptadas).
+* E. Legacy Immersion™ (Herencia Cultural): NLP detecta afinidades históricas y de estilo culinario para itinerarios hiper-personalizados. Upsells VIP: Accesos Privados Cognitivos (galerías y reservas "off-menu").
+* F. Signature Orchestration™ (Concierge & Eventos): Motor centralizado que coordina proveedores en tiempo real multisede para evitar cuellos de botella. Upsells VIP: Signature Experience Engine (temáticas) y Curaduría Musical Cognitiva.
+* G. Signature Detail™ (Hospitalidad Invisible Transversal): Al primer contacto físico, el motor orquesta biológicamente una toalla fría aromatizada, bebida premium contextual, música y temperatura ideal, sincronizadas con el nivel VIP, idioma y clima local.
+3. Capa 3 (Sales Copilot): Dashboard B2B residente para los socios (Gladys y David). Funciona como panel analítico (30% de la UI), predice cuellos de botella, activa alertas de deals, genera contratos en PDF automáticamente, asegura comisiones y maneja bases de datos relacionales en MariaDB.
+⚠️ 3. VACÍOS Y EDGE CASES CRÍTICOS (PROBLEMA + SOLUCIÓN)
+EC-01: Pérdida de señal/conectividad en alta mar (Oceanic Command™).
+* Problema: Desconexión del motor de inteligencia imposibilitando la reconfiguración de rutas marítimas y lectura de variables climáticas en mar abierto.
+* Solución: Sistema de tracking híbrido apoyado en Soporte Satelital Inteligente. Las embarcaciones descargan caches de rutas predictivas operando en modo offline y utilizan geolocalización continua para garantizar el control.
+EC-02: Desincronización por retraso de vuelos en Meet & Greet (TerraLink Executive™).
+* Problema: El cliente aterriza fuera del horario programado, generando choques logísticos en las asignaciones de flotas terrestres VIP.
+* Solución: Integración directa con APIs aeroportuarias para el monitoreo ininterrumpido de vuelos en tiempo real. El sistema detecta los retrasos automáticamente, recalcula tiempos de migración/equipaje, y reasigna conductores y vehículos de forma dinámica.
+EC-03: Overbooking Atómico y saturación de slots náuticos en MariaDB.
+* Problema: Colisiones por reservas concurrentes de embarcaciones premium o slots de expedición limitados generadas en el catálogo público simultáneamente.
+* Solución: Implementación de la directriz inquebrantable de inventory_atomic_lock a nivel de base de datos MariaDB. Las disponibilidades se congelan atómicamente antes del pago vía Stripe/Openpay, impidiendo cualquier sobreposición.
+EC-04: Consentimiento y Privacidad de Datos de HNWIs (High Net Worth Individuals) desde el Catálogo Público (Consent Gate).
+* Problema: Riesgo de fuga de preferencias exclusivas (dietas, ubicaciones, identidad VIP) si el cliente inicia contacto a través de WhatsApp o formularios públicos no encriptados.
+* Solución: Desvío de la recopilación de datos hacia un entorno de Infraestructura Blindada Global. Una vez que el cliente selecciona un servicio en el catálogo público, se le transfiere a un "Consent Gate" protegido por tokens temporales para la ingesta de sus datos sensibles, asegurando Mitigación Estricta de Riesgos Digitales antes de tocar la base de datos.
+EC-05: Ambigüedad en instrucciones de audio/voz del cliente en NLP (Normalización Ontológica).
+* Problema: El Concierge Virtual Nova recibe inputs como "Quiero algo tranquilo", sin métricas claras de presupuesto, cantidad de gente o ubicación exacta.
+* Solución: Activación del fallback tipado. El NLP desglosa la intención y deduce perfiles históricos, completando con valores por defecto seguros ("null/0" con tipado fuerte), cruzando la entrada con el vocabulario controlado (Ontología) para extraer niveles de tolerancia social, requerimiento gastronómico e intención VIP.
+💡 4. IDEAS INNOVADORAS (DESCRIPCIÓN + PERCEPCIÓN + IMPACTO)
+* IDEA-01: "Pre-Expedition Intelligence Brief"
+   * Descripción: 24 horas antes del servicio, el Asistente Inteligente Nova genera un briefing ejecutivo automatizado para el cliente (PDF/Push), resumiendo su clima, ropa sugerida calculada por biometría térmica y presentación de su equipo (conductor, guía, chef cognitivo).
+   * Percepción: Sublima el valor de anticipación (Cero Estrés), posicionando a Nova Horizonte como un equipo de control logístico predictivo inigualable.
+   * Impacto: Elimina por completo las fricciones o dudas de última hora de los HNWIs, y abre la puerta a la pre-venta del "Fast Track Inteligente" de último minuto.
+* IDEA-02: "Longitudinal Luxury Narrative"
+   * Descripción: Consolidación de la Fotografía Cinemática e IA Editorial recopilada durante los servicios (mar y tierra). El sistema post-procesa el contenido de la "Golden Hour" calculada en un reportaje visual automatizado hiper-personalizado al finalizar la estancia.
+   * Percepción: Convierte una vacación en un "Legado Inmersivo", superando la oferta transaccional de cualquier competidor local o global.
+   * Impacto: Fidelización atómica. La narrativa visual entregada al cliente actúa de facto como marketing orgánico de altísimo nivel cuando lo comparte en sus ecosistemas de influencia.
+* IDEA-03: "Predictive Churn & Loyalty Radar"
+   * Descripción: Modelo de machine learning interconectado al Dashboard B2B, que analiza la temporalidad de visitas históricas, clima y variables económicas para predecir cuándo el cliente está listo para regresar.
+   * Percepción: Demuestra un conocimiento integral del cliente.
+   * Impacto: Permite a Gladys y David cerrar ventas proactivas de paquetes de nivel 'black' VIP sin necesidad de invertir en pautas de retargeting generalistas.
+🛡️ 5. PROTOCOLO ANTI-ALUCINACIÓN (5 CAPAS)
+La inteligencia operativa está restringida por una arquitectura determinística inquebrantable:
+1. Capa 1 (System Prompt Estricto): Implementación de los Mandamientos del Génesis, vetando cualquier vocabulario prohibido y limitando las respuestas estrictamente a las reglas de negocio.
+2. Capa 2 (RAG Cerrado): El Catálogo Oficial de Servicios V1.0 opera como fuente de verdad incuestionable. El Concierge Virtual Nova solo puede ofertar servicios y upsells explícitamente parametrizados en la base de datos.
+3. Capa 3 (Confidence Gating): Umbral inmutable de precisión en la predicción algorítmica y NLP. Si la instrucción carece de la exactitud requerida (< 0.75), la plataforma ejecuta un Human Handoff seguro a Gladys y David a través del Copiloto B2B.
+4. Capa 4 (Disclaimers Contextuales de Firma): Generación automática de contratos digitales al confirmar la transacción, estableciendo claramente las políticas operativas no reembolsables u otros disclaimers antes del payload de Stripe.
+5. Capa 5 (Audit Log Permanente): Sistema centralizado de alta disponibilidad. Todo intento fallido, rechazo de API, o desviación de proceso se graba en un archivo error.log sin reflejar fallas del sistema o bases de datos al cliente.
+🧱 6. REGLAS DE RESILIENCIA Y ESQUEMA RELACIONAL
+Script SQL (Regla de inmutabilidad y snake_case aplicada):
+* CREATE TABLE services (
+*     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+*     uuid CHAR(36) NOT NULL UNIQUE,
+*     category ENUM('maritime', 'ground_logistics', 'nature', 'equestrian', 'cultural', 'concierge') NOT NULL,
+*     vip_level ENUM('standard_vip', 'elite', 'black') NOT NULL DEFAULT 'standard_vip',
+*     service_name VARCHAR(255) NOT NULL,
+*     slug VARCHAR(255) NOT NULL UNIQUE,
+*     short_pitch TEXT NOT NULL,
+*     critical_problem TEXT NOT NULL,
+*     ai_brain_description LONGTEXT NOT NULL,
+*     friction_zero_flow LONGTEXT NOT NULL,
+*     upsell_logic LONGTEXT NOT NULL,
+*     badges JSON NULL,
+*     base_price DECIMAL(12,2) NOT NULL,
+*     dynamic_price_enabled BOOLEAN DEFAULT TRUE,
+*     active BOOLEAN DEFAULT TRUE,
+*     featured BOOLEAN DEFAULT FALSE,
+*     max_capacity INT NULL,
+*     estimated_duration_minutes INT NULL,
+*     geo_zone VARCHAR(255) NULL,
+*     climate_dependency BOOLEAN DEFAULT FALSE,
+*     requires_manual_approval BOOLEAN DEFAULT FALSE,
+*     signature_detail_enabled BOOLEAN DEFAULT TRUE,
+*     booking_buffer_minutes INT DEFAULT 120,
+*     inventory_atomic_lock BOOLEAN DEFAULT TRUE,
+*     ai_predictive_matching BOOLEAN DEFAULT TRUE,
+*     voice_nlp_enabled BOOLEAN DEFAULT TRUE,
+*     realtime_tracking_enabled BOOLEAN DEFAULT TRUE,
+*     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+*     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+* );
+
+
+Infraestructura DevOps y Resiliencia Estricta (Seguridad Avanzada de Grado Bancario):
+* Bóveda (.env): Toda credencial (Stripe, APIs, Base de datos) residirá cifrada, con un git ignore strict previniendo exposición en repositorios.
+* Aislamiento de Entornos: Separación total de Infraestructura Blindada Global entre Local, Staging y Producción. Nunca se manipula producción desde el entorno local.
+* Auth Real (Sanitización JWT): Modificaciones a la DB mediante POST/PUT/DELETE exigen autenticación 401 severa. El protocolo CORS no se acepta como validación de seguridad aislada.
+* Caja Negra Forense: Las excepciones de PHP/PDO están silenciadas y atrapadas por try/catch. El backend reporta una degradación controlada al usuario con Protocolos de Alta Disponibilidad, y envía la anatomía del fallo al error.log.
+📊 7. PRIORIZACIÓN Y CHECKLIST DE IMPLEMENTACIÓN
+Tabla de Prioridades Tácticas | Componente | Nivel | Descripción y Mapeo | | :--- | :--- | :--- | | Infraestructura Base / DB | 🔴 P0-Crítico | Ejecución del script services, .env, Aislamiento, y API de Auth (Seguridad Avanzada de Grado Bancario). | | Integración NLP / Stripe | 🔴 P0-Crítico | Motor interno de parsing lingüístico y bloqueos atómicos vía pagos Openpay/Stripe en el Catálogo Público. | | Dashboard B2B | 🟡 P1-Alto | Interfaz para Socios (Gladys y David), panel de control para generación de contratos PDF. | | Logística APIs Externas | 🟡 P1-Alto | Integraciones para TerraLink Executive™ (Vuelos) y Oceanic Command™ (Clima Oceánico). | | Predictive Engine / Upsells | 🟢 P2-Magia | Algoritmos de sugerencias (Golden hour, matching fotográfico, vino inteligente, curaduría musical). |
+Checklist de Implementación (Fases Operativas): Fase A (Entrada/Seguridad)
+* [ ] Pendiente Crear archivo CLAUDE.md residente e iniciar la bóveda secreta .env / .env.example.
+* [ ] Pendiente Implementar la interfaz Capa 1 "Showcase de Ultra-Lujo Responsivo" (Catálogo Público 100% indexable, UI oscura Mobile-First).
+* [ ] Pendiente Activar Seguridad Avanzada de Grado Bancario en Apache .htaccess y Auth JWT para endpoints POST/PUT/DELETE.
+Fase B (Ingesta/DB)
+* [ ] Pendiente Ejecutar CREATE TABLE services asegurando tipado y validación de snake_case.
+* [ ] Pendiente Parametrizar la base de datos centralizada api/conexion.php bajo PDO seguro con Caja Negra (try/catch).
+* [ ] Pendiente Mapear inventario oficial de servicios A al G con sus Upsells en la base de datos de producción.
+Fase C (RAG/APIs)
+* [ ] Pendiente Establecer el protocolo JSON UTF-8 para intercambios de datos del catálogo.
+* [ ] Pendiente Integrar los motores de extracción NLP del Concierge Virtual Nova (Intención, Preferencias VIP, Presupuesto).
+* [ ] Pendiente Configurar las integraciones de terceros (APIs de vuelos, clima oceánico, Stripe/Openpay).
+Fase D (Copiloto/CI/CD workflows)
+* [ ] Pendiente Habilitar la Capa 3: Dashboard B2B Sales Copilot para Gladys y David.
+* [ ] Pendiente Levantar archivo .github/workflows/deploy.yml para el pipeline de CI/CD automatizado vía FTP.
+* [ ] Pendiente Generar indexación en Hub de Reportes (/reportes/index.html) documentando el sistema para Gladys y David.
+*
