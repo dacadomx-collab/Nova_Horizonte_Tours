@@ -20,9 +20,9 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
-          # Dirección de impacto directo en el File Manager asignado
-          server-dir: public_html/nova/
-          # Exclusión explícita de archivos locales, gobernanza y datos sensibles
+          # CORRECCIÓN DE IMPACTO: Usamos './' porque el usuario FTP ya inicia sesión en public_html/nova/
+          server-dir: ./
+          # Exclusión explícita de archivos locales y gobernanza
           exclude: |
             **/.git*
             **/.git*/**
