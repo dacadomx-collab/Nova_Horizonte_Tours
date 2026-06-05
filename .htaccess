@@ -1,33 +1,40 @@
 # =============================================================================
-# PLANTILLA GENÉRICA : .htaccess (Raíz del proyecto)
-# PROPÓSITO : Blindaje Nivel Militar (Deshabilitar indexado, ocultar .env,
-#             forzar rutas API y limpiar URLs de Next.js)
+# BLINDAJE MILITAR DEFINITIVO - NOVA HORIZONTE TOURS
+# AUTOR: AXON_DCD (Ecosistema Controlado de Fricción Cero)
 # =============================================================================
 
+# 1. Establecer index.php como el punto de despegue oficial del subdominio
+DirectoryIndex index.php
+
+# 2. Desactivar el listado público de directorios (Cero espionaje de archivos)
 Options -Indexes
 
+# 3. Denegar acceso a cualquier archivo oculto que empiece con punto
 <FilesMatch "^\.">
     Require all denied
 </FilesMatch>
 
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteRule ^knowledge(/.*)?$ - [F,L]
-</IfModule>
-
-<FilesMatch "(^\.htaccess|^\.htpasswd|\.ini$)">
+# 4. Bloqueo absoluto de archivos sensibles de configuración y registros
+<FilesMatch "\.(env|ini|log|sql|git|md|yml|example)$">
     Require all denied
 </FilesMatch>
 
-<FilesMatch "\.php$">
-    Require all denied
-</FilesMatch>
-
+# 5. Enrutamiento Inteligente y Protección de Carpetas
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteRule ^api/[^/]+\.php$ - [L]
+    RewriteBase /
+
+    # Bloquear acceso público directo a carpetas críticas de infraestructura
+    RewriteRule ^(knowledge|CORE|logs|\.git|\.github)/ - [F,L]
+
+    # REGLA DE FRICCIÓN CERO: Si el recurso solicitado no es un archivo real 
+    # ni una carpeta existente, se procesa limpiamente a través de index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [L]
 </IfModule>
 
+# 6. Cabeceras de Seguridad Avanzada (Mitigación de XSS, CSRF y Clickjacking)
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
     Header always set X-Frame-Options "DENY"
@@ -37,21 +44,6 @@ Options -Indexes
     Header always unset Server
 </IfModule>
 
-ErrorDocument 403 "Acceso denegado."
-ErrorDocument 404 "Recurso no encontrado."
-
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{REQUEST_URI} !^/api/
-    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}.html -f
-    RewriteRule ^(.*)$ $1.html [L]
-    RewriteRule ^$ index.html [L]
-</IfModule>
-
-# Ocultar y bloquear acceso a repositorios Git y flujos CI/CD
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteRule ^\.git - [F,L]
-    RewriteRule ^\.github - [F,L]
-    RewriteRule ^deploy\.yml - [F,L]
-</IfModule>
+# 7. Manejo de Errores Controlado por la Infraestructura
+ErrorDocument 403 "Acceso denegado por Protocolo de Seguridad AXON_DCD."
+ErrorDocument 404 "Recurso no encontrado en el ecosistema Nova Horizonte Tours."
