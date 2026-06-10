@@ -75,28 +75,30 @@ a:hover { color: var(--nh-accent-dim); }
 /* ── 5. NAVBAR ───────────────────────────────────────────── */
 #nh-navbar {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0; left: 0;
+  width: 100%;
+  box-sizing: border-box;
   height: var(--nav-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1.25rem;
-  background: rgba(11,12,16,.85);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--nh-border);
-  z-index: 1000;
+  background: rgba(11,12,16,.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  z-index: 9999;
   transition: var(--nh-transition);
 }
 
-[data-theme="light"] #nh-navbar {
-  background: rgba(240,244,248,.88);
-}
-
 .nh-logo {
-  height: 38px;
+  max-height: clamp(3rem, 5vw, 4rem);
+  height: auto;
   width: auto;
   object-fit: contain;
+  display: block;
+  filter: invert(1) brightness(1.2);
+  mix-blend-mode: screen;
 }
 
 .nh-nav-controls {
@@ -139,69 +141,102 @@ a:hover { color: var(--nh-accent-dim); }
   letter-spacing: .08em;
 }
 
-/* Hamburger */
+/* Hamburger — 3 líneas ultra-delgadas que mutan a "X" */
 .nh-hamburger {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
+  gap: 6px;
   width: 38px;
   height: 38px;
   border: none;
   background: transparent;
   cursor: pointer;
   padding: 8px;
+  z-index: 10000;
+  position: relative;
 }
 
 .nh-hamburger span {
   display: block;
   width: 100%;
-  height: 2px;
+  height: 1.5px;
   background: var(--nh-text);
-  border-radius: 2px;
-  transition: var(--nh-transition);
+  border-radius: 1px;
+  transition: transform .4s ease, opacity .4s ease, background-color .3s ease;
   transform-origin: center;
 }
 
-.nh-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nh-hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
 .nh-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.nh-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nh-hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-/* Mobile drawer */
+/* Mobile drawer — Silent Luxury Menu (overlay de pantalla completa) */
 #nh-drawer {
   position: fixed;
-  top: var(--nav-h);
-  left: 0; right: 0;
-  background: rgba(11,12,16,.97);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--nh-border);
-  padding: 1.5rem 1.25rem 2rem;
-  z-index: 999;
+  inset: 0;
+  height: 100dvh;
+  background: rgba(11,12,16,.98);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  padding: 0 8vw;
+  z-index: 9998;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
-  transform: translateY(-110%);
-  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(.5rem, 2vw, 1.25rem);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .45s ease, visibility 0s linear .45s;
+  counter-reset: nh-drawer-counter;
 }
 
-[data-theme="light"] #nh-drawer { background: rgba(240,244,248,.97); }
-
-#nh-drawer.open { transform: translateY(0); }
+#nh-drawer.open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .45s ease;
+}
 
 .nh-drawer-link {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--nh-text);
-  padding: .75rem 0;
-  border-bottom: 1px solid var(--nh-border);
   display: flex;
-  align-items: center;
-  gap: .75rem;
-  transition: var(--nh-transition);
+  align-items: baseline;
+  gap: 1rem;
+  font-family: var(--nh-font-display);
+  font-size: clamp(1.65rem, 6.5vw, 2.85rem);
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--nh-text);
+  padding: .35rem 0;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .5s cubic-bezier(.4,0,.2,1), transform .5s cubic-bezier(.4,0,.2,1), color .3s ease;
 }
 
-.nh-drawer-link:hover { color: var(--nh-accent); padding-left: .5rem; }
-.nh-drawer-link svg  { flex-shrink: 0; }
+.nh-drawer-link::before {
+  counter-increment: nh-drawer-counter;
+  content: counter(nh-drawer-counter, decimal-leading-zero) ' //';
+  font-family: var(--nh-font);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  color: var(--nh-accent);
+  flex-shrink: 0;
+}
+
+.nh-drawer-link:hover { color: var(--nh-accent); }
+
+/* Stagger reveal — Framer-like (transition-delay) */
+#nh-drawer.open .nh-drawer-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#nh-drawer.open .nh-drawer-link:nth-child(1) { transition-delay: .12s; }
+#nh-drawer.open .nh-drawer-link:nth-child(2) { transition-delay: .18s; }
+#nh-drawer.open .nh-drawer-link:nth-child(3) { transition-delay: .24s; }
+#nh-drawer.open .nh-drawer-link:nth-child(4) { transition-delay: .30s; }
 
 /* Desktop nav links (hidden < 768px) */
 .nh-nav-links {
@@ -238,10 +273,24 @@ a:hover { color: var(--nh-accent-dim); }
   overflow: hidden;
 }
 
+.nh-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center top;
+  z-index: -1;
+  display: block;
+}
+
 .nh-hero-bg {
   position: absolute;
   inset: 0;
   background:
+    linear-gradient(to bottom, rgba(11,12,16,.65) 0%, rgba(11,12,16,.30) 45%, rgba(11,12,16,.75) 100%),
     radial-gradient(ellipse 70% 50% at 50% 30%, rgba(0,229,255,.08) 0%, transparent 70%),
     radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,229,255,.05) 0%, transparent 60%);
   pointer-events: none;
@@ -505,7 +554,83 @@ a:hover { color: var(--nh-accent-dim); }
   line-height: 1.7;
 }
 
-/* ── 10. ARF-GRID — SERVICE CARDS ────────────────────────── */
+/* ── 10. ARF-GRID — CARD MEDIA (VIDEO / IMG, DATA-SAVER) ──── */
+.nh-card-media-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nh-card-poster,
+.nh-card-media-video,
+.nh-card-media-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s cubic-bezier(.4,0,.2,1), opacity .4s ease;
+}
+
+.nh-card-media-video {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nh-card-media-wrap.is-active .nh-card-media-video {
+  opacity: 1;
+}
+
+.nh-card-media-wrap.is-active .nh-card-poster {
+  opacity: 0;
+}
+
+.nh-card:hover .nh-card-poster img,
+.nh-card:hover .nh-card-media-video {
+  transform: scale(1.05);
+}
+
+.nh-card-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.3);
+  background: rgba(11,12,16,.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--nh-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: var(--nh-transition);
+}
+
+.nh-card-play svg {
+  margin-left: 2px;
+}
+
+.nh-card-play:hover {
+  background: var(--nh-accent);
+  border-color: var(--nh-accent);
+  color: #0B0C10;
+}
+
+.nh-card-media-wrap.is-active .nh-card-play {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ── 10b. ARF-GRID — SERVICE CARDS ───────────────────────── */
 .nh-grid {
   display: flex;
   flex-wrap: wrap;
@@ -638,9 +763,45 @@ a:hover { color: var(--nh-accent-dim); }
 
 .nh-card:hover .nh-card-cta { gap: .55rem; }
 
-/* ── 11. SIGNATURE DETAIL BANNER ─────────────────────────── */
+/* ── 11. VISUAL BREAK — PANORAMIC DIVIDER ────────────────── */
+.nh-visual-break {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  aspect-ratio: 21 / 9;
+  position: relative;
+  display: block;
+}
+
+.nh-visual-break img {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.nh-visual-break::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(11,12,16,.55) 0%,
+    rgba(11,12,16,.10) 50%,
+    rgba(11,12,16,.55) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── 12. SIGNATURE DETAIL BANNER ─────────────────────────── */
 #nh-signature {
-  background: linear-gradient(135deg, rgba(0,229,255,.06) 0%, transparent 60%);
+  background:
+    linear-gradient(rgba(11,12,16,.80), rgba(11,12,16,.80)),
+    url('../assets/img/signature_marina_reflections.jpg') center / cover no-repeat;
   border-top: 1px solid var(--nh-border);
   border-bottom: 1px solid var(--nh-border);
   padding: 3rem 1.25rem;
@@ -667,8 +828,18 @@ a:hover { color: var(--nh-accent-dim); }
   text-align: center;
 }
 
-.nh-signature-item span:first-child {
-  font-size: 1.8rem;
+.nh-sig-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: var(--nh-accent);
+}
+
+.nh-sig-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* ── 12. TRUST STRIP ─────────────────────────────────────── */
@@ -930,6 +1101,12 @@ a:hover { color: var(--nh-accent-dim); }
   100% { background-position:  200% center; }
 }
 
+@keyframes nh-aura-ring {
+  0%   { transform: scale(1);   opacity: .8; }
+  70%  { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
 /* Scroll reveal */
 .nh-reveal {
   opacity: 0;
@@ -978,4 +1155,253 @@ a:hover { color: var(--nh-accent-dim); }
   border: none;
   border-top: 1px solid var(--nh-border);
   margin: 0;
+}
+
+/* ── 18. BACK TO TOP ─────────────────────────────────────── */
+#nh-back-top {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--nh-surface);
+  border: 1px solid var(--nh-border);
+  color: var(--nh-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 940;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .3s ease, transform .3s ease, border-color .3s ease, color .3s ease, box-shadow .3s ease;
+}
+
+#nh-back-top.visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+#nh-back-top:hover {
+  border-color: var(--nh-accent);
+  color: var(--nh-accent);
+  box-shadow: var(--nh-glow-sm);
+}
+
+/* ── 19. AURA — WIDGET FLOTANTE DE IA ────────────────────── */
+#nh-aura-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--nh-surface);
+  border: 1.5px solid var(--nh-accent);
+  box-shadow: var(--nh-glow-sm), 0 4px 20px rgba(0,0,0,.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 950;
+  transition: var(--nh-transition);
+}
+
+#nh-aura-toggle:hover {
+  box-shadow: var(--nh-glow), 0 4px 24px rgba(0,0,0,.5);
+  transform: scale(1.06);
+}
+
+.nh-aura-pulse {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--nh-accent);
+  position: relative;
+}
+
+.nh-aura-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid var(--nh-accent);
+  animation: nh-aura-ring 2s ease infinite;
+}
+
+#nh-aura-panel {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 1.5rem;
+  width: min(92vw, 360px);
+  background: var(--nh-surface);
+  border: 1px solid var(--nh-border);
+  border-radius: var(--nh-radius);
+  box-shadow: 0 8px 40px rgba(0,0,0,.5), var(--nh-glow-sm);
+  transform: translateY(16px) scale(.97);
+  transform-origin: bottom right;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+  z-index: 949;
+}
+
+#nh-aura-panel.open {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nh-aura-header {
+  padding: 1rem 1.25rem .75rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  border-bottom: 1px solid var(--nh-border);
+}
+
+.nh-aura-orb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--nh-accent);
+  box-shadow: var(--nh-glow-sm);
+  flex-shrink: 0;
+  animation: nh-pulse 2s ease infinite;
+}
+
+.nh-aura-header-text { flex: 1; min-width: 0; }
+
+.nh-aura-name {
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--nh-accent);
+  line-height: 1.3;
+  font-family: var(--nh-font-display);
+}
+
+.nh-aura-status {
+  font-size: .68rem;
+  color: var(--nh-text-muted);
+  letter-spacing: .03em;
+}
+
+.nh-aura-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--nh-border);
+  background: transparent;
+  color: var(--nh-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--nh-transition);
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.nh-aura-close:hover { border-color: var(--nh-accent); color: var(--nh-accent); }
+
+.nh-aura-body { padding: 1rem 1.25rem 1.25rem; }
+
+.nh-aura-response {
+  min-height: 2.5rem;
+  font-size: .82rem;
+  color: var(--nh-text-muted);
+  line-height: 1.65;
+  margin-bottom: .85rem;
+  padding: .75rem .9rem;
+  background: var(--nh-bg);
+  border-radius: var(--nh-radius-sm);
+  border: 1px solid var(--nh-border);
+}
+
+.nh-aura-controls {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.nh-aura-input {
+  flex: 1;
+  background: var(--nh-bg);
+  border: 1px solid var(--nh-border);
+  border-radius: 99px;
+  padding: .6rem 1rem;
+  font-size: .88rem;
+  color: var(--nh-text);
+  font-family: var(--nh-font);
+  outline: none;
+  min-width: 0;
+  transition: var(--nh-transition);
+}
+
+.nh-aura-input:focus {
+  border-color: var(--nh-accent);
+  box-shadow: var(--nh-glow-sm);
+}
+
+.nh-aura-input::placeholder { color: var(--nh-text-muted); }
+
+.nh-aura-btn {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--nh-border);
+  background: var(--nh-bg);
+  color: var(--nh-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--nh-transition);
+}
+
+.nh-aura-btn:hover { border-color: var(--nh-accent); color: var(--nh-accent); }
+
+.nh-aura-btn.active {
+  border-color: var(--nh-accent);
+  color: var(--nh-accent);
+  background: rgba(0,229,255,.08);
+}
+
+.nh-aura-btn.listening {
+  border-color: var(--nh-accent);
+  color: var(--nh-accent);
+  animation: nh-ring 1.2s ease infinite;
+}
+
+.nh-aura-send {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--nh-accent);
+  border: none;
+  color: #0B0C10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--nh-transition);
+}
+
+.nh-aura-send:hover {
+  background: var(--nh-accent-dim);
+  box-shadow: var(--nh-glow-sm);
+}
+
+@media (min-width: 480px) {
+  #nh-back-top   { left: 1.75rem; }
+  #nh-aura-toggle,
+  #nh-aura-panel { right: 1.75rem; }
 }

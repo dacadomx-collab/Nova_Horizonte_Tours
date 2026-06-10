@@ -24,8 +24,11 @@ Options -Indexes
     RewriteEngine On
     RewriteBase /
 
+    # Excepción explícita: portal de diagnóstico (token verificado internamente por PHP)
+    RewriteRule ^core/tools/test_connections\.php$ - [L]
+
     # Bloquear acceso público directo a carpetas críticas de infraestructura
-    RewriteRule ^(knowledge|CORE|logs|\.git|\.github)/ - [F,L]
+    RewriteRule ^(knowledge|core|CORE|logs|\.git|\.github)/ - [F,L]
 
     # REGLA DE FRICCIÓN CERO: Si el recurso solicitado no es un archivo real 
     # ni una carpeta existente, se procesa limpiamente a través de index.php

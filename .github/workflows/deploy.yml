@@ -28,12 +28,15 @@ jobs:
             **/.git*/**
             .github/**
             knowledge/**
+            core/.env
             CORE/.env
+            core/.env.example
             CORE/.env.example
             logs/**
-            z/node_modules/**
-            z/.next/**
-            z/out/**
+            node_modules/**
+            .next/**
+            out/**
             CLAUDE.md
             README.md
+            *.md
             *.sql

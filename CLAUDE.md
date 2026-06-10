@@ -1,66 +1,89 @@
 # CLAUDE.md — Manual Operativo del Agente IA
-## [NOMBRE_DEL_PROYECTO] | DCD LABS / VECTOR_CERO
-**Versión:** 1.0 | **Fecha:** [FECHA_DE_INICIO] | **Arquitecto:** [NOMBRE_ARQUITECTO]
+## Nova Horizonte Tours | DCD LABS / VECTOR_CERO
+**Versión:** 1.1 | **Fecha:** 2026-06-04 | **Agente Ejecutor:** AXON_DCD
 
 ---
 
 ## 1. IDENTIDAD DEL PROYECTO
 
-**Proyecto:** [NOMBRE_DEL_PROYECTO]
-**Cliente / Dueño:** [NOMBRE_DEL_CLIENTE_O_EMPRESA]
-**Objetivo:** [Descripción en 1-2 líneas del propósito central del sistema]
-**Dominio de producción:** `https://[dominio].com`
-**Entorno local:** `C:\xampp\htdocs\[NOMBRE_DEL_PROYECTO]\`
+**Proyecto:** Nova Horizonte Tours
+**Cliente / Dueño:** Nova Horizonte Tours — La Paz, Baja California Sur
+**Objetivo:** Plataforma web de ultra-lujo para logística y hospitalidad privada. Orquesta experiencias exclusivas en tierra, mar y cielo con un sistema de concierge virtual y catálogo de servicios VIP A–G.
+**Dominio de producción:** `https://nova.tourfindy.com`
+**Entorno local:** `C:\xampp\htdocs\Nova_Horizonte_Tours\`
 **Repositorio:** GitHub → rama `main` → auto-deploy vía GitHub Actions FTP
 
 ### Stack Tecnológico
-- **Frontend:** [React / Vue / HTML+CSS+JS nativo / Next.js]
+- **Frontend:** HTML5 + CSS3 + Vanilla JS (Mobile-First, Modo Oscuro Nativo)
 - **Backend:** PHP 8+ con `declare(strict_types=1)` obligatorio en todo archivo nuevo
-- **Base de Datos:** MySQL/MariaDB vía PDO centralizado (`api/conexion.php`)
-- **Servidor:** Apache/XAMPP local + [Proveedor] (producción)
-- **IA (si aplica):** [OpenAI / Anthropic / N/A] — API Key SOLO en `.env`
+- **Base de Datos:** MySQL/MariaDB vía PDO centralizado (`core/src/conexion.php`)
+- **Servidor:** Apache/XAMPP local + cPanel Shared Hosting (producción en `nova.tourfindy.com`)
+- **CI/CD:** GitHub Actions → FTP Deploy (`SamKirkland/FTP-Deploy-Action@v4.3.5`)
+- **IA (si aplica):** N/A por ahora — API Key SOLO en `.env` si se integra
+
+### Activos Visuales (Rutas Canónicas)
+| Activo | Ruta | Uso |
+| :--- | :--- | :--- |
+| Logo Light Mode | `assets/img/logo1.png` | Navbar en tema claro |
+| Logo Dark Mode | `assets/img/logo3.png` | Navbar en tema oscuro + Favicon global |
+| Logo Footer | `assets/img/logo2.png` | Footer (fallback a logo1.png) |
+| Favicon Global | `assets/img/logo3.png` | `<link rel="icon">` en todas las páginas |
+
+### Paleta de Colores (WCAG 2.1)
+| Rol | HEX | Uso |
+| :--- | :--- | :--- |
+| Fondo Principal | `#0B0C10` | Base dark mode, hero background |
+| Acento / CTAs | `#00E5FF` | Botones primarios, highlights |
+| Superficies / Cards | `#1F2833` | Tarjetas, navbar |
+| Texto Principal | `#FAFAFA` | Textos sobre fondo oscuro |
 
 ---
 
 ## 2. ESTRUCTURA DE CARPETAS
 
 ```
-[NOMBRE_DEL_PROYECTO]/
-├── index.html / index.php           ← Punto de entrada principal
+Nova_Horizonte_Tours/
+├── index.php                        ← Punto de entrada principal (SPA)
 ├── .htaccess                        ← Blindaje Apache Nivel Militar
 ├── .env                             ← Credenciales REALES (NUNCA en Git)
-├── .env.example                     ← Plantilla pública (sí en Git)
+├── .env.example                     ← (no aplica en raíz — ver core/)
 ├── .gitignore                       ← Protección del repositorio
 ├── CLAUDE.md                        ← Este archivo — manual del agente
 │
-├── api/                             ← Endpoints PHP (todos blindados)
-│   ├── conexion.php                 ← Conexión PDO centralizada (leer desde .env)
-│   ├── cors.php                     ← Gestor CORS centralizado
-│   ├── jwt.php                      ← Utilidad JWT HS256 sin dependencias
-│   ├── auth_middleware.php          ← Validación Bearer JWT + RBAC
-│   └── [endpoint].php               ← Endpoints de negocio
+├── core/                            ← Núcleo backend del sistema
+│   ├── .env.example                 ← Plantilla pública de variables (sí en Git)
+│   ├── .env                         ← Credenciales REALES (NUNCA en Git)
+│   └── src/
+│       └── conexion.php             ← Conexión PDO centralizada (lee core/.env)
 │
 ├── assets/                          ← CSS, JS, imágenes estáticas
-│   ├── css/
-│   ├── js/
+│   ├── css/   (→ css/ en raíz)
+│   ├── js/    (→ js/ en raíz)
 │   └── img/
+│       ├── logo1.png                ← Logo Light Mode
+│       ├── logo2.png                ← Logo Footer
+│       └── logo3.png                ← Logo Dark Mode + Favicon
+│
+├── css/                             ← Hojas de estilo
+│   └── main.css
+│
+├── js/                              ← Scripts frontend
+│   └── app.js
 │
 ├── logs/                            ← Logs del sistema (bloqueados en .htaccess)
-│   └── error.log
+│   └── backend.log
 │
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml               ← Pipeline CI/CD automático
 │
-└── knowledge/                       ← Memoria del sistema (bloqueada en .htaccess)
+└── knowledge/                       ← Codex del sistema (bloqueado en .htaccess)
     ├── 00_ADN_DEL_PROYECTO.md
     ├── 01_LEY_Y_MANDAMIENTOS.md
-    ├── 02_DATABASE_SCHEMA_BLUEPRINT.md
-    ├── 03_API_CONTRACTS_AND_ROUTING.md
+    ├── 02_SYSTEM_CODEX_REGISTRY.md
+    ├── 03_CONTRATOS_API_Y_LOGICA.md
     ├── 04_PROTOCOLOS_DE_VUELO.md
-    ├── 05_RUNTIME_GUARDRAILS.md
-    ├── 06_AI_COPILOT_STRATEGY.md
-    └── 07_ROADMAP_Y_CHECKLIST_IMPLEMENTACION.md
+    └── 05_RUNTIME_GUARDRAILS.md
 ```
 
 ---
@@ -73,7 +96,7 @@ Referencia completa: `knowledge/01_LEY_Y_MANDAMIENTOS.md`
 | :--- | :--- | :--- |
 | 1 | Mobile-First | Todo componente nace para celular. Sin anchos fijos (px) en contenedores. |
 | 2 | Seguridad Nivel Militar | Sanitización + Prepared Statements. Blindaje SQLi, XSS, CSRF. |
-| 3 | Modo Oscuro | Contraste mínimo WCAG 4.5:1. Tema fluido Light/Dark. |
+| 3 | Modo Oscuro | Contraste mínimo WCAG 4.5:1. Tema fluido Light/Dark. Logo swap logo1↔logo3. |
 | 4 | Anti-Alucinación | PROHIBIDO inventar variables. Si no está en el Codex, DETENERSE. |
 | 5 | Contrato de API Estricto | No alterar propiedades JSON sin modificar el Contrato oficial. |
 | 6 | Ejecución Determinística | Sin "mejoras" ni extensiones no solicitadas. |
@@ -81,14 +104,14 @@ Referencia completa: `knowledge/01_LEY_Y_MANDAMIENTOS.md`
 | 8 | Dead Code | Auditoría de huérfanos antes de cada entrega. |
 | 9 | Inmutabilidad del Sistema | No crear tablas ni alterar schema sin autorización explícita. |
 | 10 | Sinónimos Prohibidos | Un solo nombre válido por concepto. Cero traducciones libres. |
-| 11 | Arranque Blindado | Todo proyecto inicia con `.env`, `.htaccess` y conexión PDO. |
-| 12 | **Bóveda de Secretos** | **PROHIBIDO hardcodear credenciales, tokens o API Keys. Todo en `.env`.** |
+| 11 | Arranque Blindado | `.env`, `.htaccess`, `core/src/conexion.php` — fundación inamovible. |
+| 12 | Bóveda de Secretos | PROHIBIDO hardcodear credenciales. Todo en `core/.env`. |
 | 13 | Aislamiento de Entornos | Local NUNCA apunta a DB de producción. 3 entornos: Local/Staging/Prod. |
-| 14 | CORS ≠ Auth | Todo endpoint POST/PUT/DELETE requiere autenticación real. Sin token = 401. |
-| 15 | Agente Residente | Todo proyecto tiene `CLAUDE.md` actualizado. |
-| 16 | CI/CD Inquebrantable | Deploy automático vía `deploy.yml`. Despliegue manual prohibido. |
-| 17 | Documentación Viva | Módulo sin documentar = módulo no terminado. Hub de reportes obligatorio. |
-| 18 | **Auditoría AXON DCD** | **Ningún proyecto a producción sin pasar el scanner perimetral AXON DCD.** |
+| 14 | CORS ≠ Auth | Endpoints POST/PUT/DELETE requieren JWT. Sin token = 401. |
+| 15 | Agente Residente | `CLAUDE.md` siempre actualizado = condición de cierre de hito. |
+| 16 | CI/CD Inquebrantable | Deploy automático vía `deploy.yml`. Deploy manual prohibido. |
+| 17 | Documentación Viva | Módulo sin documentar = módulo no terminado. |
+| 18 | Auditoría AXON DCD | Ningún proyecto a producción sin pasar el scanner perimetral. |
 
 ---
 
@@ -104,11 +127,12 @@ Referencia completa: `knowledge/01_LEY_Y_MANDAMIENTOS.md`
 - Mostrar errores de PDO o PHP en el frontend (usar try/catch + logs).
 
 ### OBLIGATORIO siempre:
-- Toda credencial: `getenv('NOMBRE_VARIABLE')` o `parse_ini_file()` desde el `.env`.
+- Toda credencial: `parse_ini_file()` desde `core/.env`.
 - Toda ruta PHP: `require_once __DIR__ . '/ruta/archivo.php'` — sin excepción.
-- Toda conexión a BD: a través de `api/conexion.php` únicamente.
-- Antes de generar código: verificar que variables existen en `02_DATABASE_SCHEMA_BLUEPRINT.md`.
+- Toda conexión a BD: a través de `core/src/conexion.php` únicamente.
+- Antes de generar código: verificar que variables existen en `02_SYSTEM_CODEX_REGISTRY.md`.
 - Al detectar credenciales hardcodeadas: reportar y corregir inmediatamente.
+- Logs de errores: siempre en `logs/backend.log` con timestamp ISO 8601.
 
 ---
 
@@ -117,14 +141,14 @@ Referencia completa: `knowledge/01_LEY_Y_MANDAMIENTOS.md`
 **Modo:** Determinístico. No creativo. No expansivo.
 
 ### Antes de escribir código:
-1. Consultar `03_API_CONTRACTS_AND_ROUTING.md` — respetar contratos de API existentes.
-2. Verificar que las variables a usar están en `02_DATABASE_SCHEMA_BLUEPRINT.md`.
+1. Consultar `03_CONTRATOS_API_Y_LOGICA.md` — respetar contratos de API existentes.
+2. Verificar que las variables a usar están en `02_SYSTEM_CODEX_REGISTRY.md`.
 3. Confirmar que no se alteran tablas de BD (Mandamiento 9).
 4. Ejecutar el PRE-CODE CHECKLIST de `04_PROTOCOLOS_DE_VUELO.md`.
 
 ### Al terminar un módulo:
-1. Actualizar `02_DATABASE_SCHEMA_BLUEPRINT.md` con nuevas tablas o variables.
-2. Actualizar `03_API_CONTRACTS_AND_ROUTING.md` si se creó un nuevo endpoint.
+1. Actualizar `02_SYSTEM_CODEX_REGISTRY.md` con nuevas tablas, variables o endpoints.
+2. Actualizar `03_CONTRATOS_API_Y_LOGICA.md` si se creó un nuevo endpoint.
 3. Ejecutar el POST-CODE VALIDATION de `04_PROTOCOLOS_DE_VUELO.md`.
 4. Reportar al Arquitecto el estado del módulo.
 
@@ -143,33 +167,38 @@ Referencia completa: `knowledge/01_LEY_Y_MANDAMIENTOS.md`
 **GitHub Secrets requeridos** (Settings → Secrets → Actions):
 | Secret | Contenido |
 | :--- | :--- |
-| `FTP_SERVER` | Servidor FTP del hosting |
-| `FTP_USERNAME` | Usuario FTP |
+| `FTP_SERVER` | Servidor FTP del hosting (ej. `ftp.tourfindy.com`) |
+| `FTP_USERNAME` | Usuario FTP del subdominio |
 | `FTP_PASSWORD` | Contraseña FTP (NUNCA en código) |
-| `FTP_REMOTE_DIR` | Ruta remota (ej. `/public_html/`) |
+
+**Nota de impacto:** `server-dir: ./` porque el usuario FTP inicia sesión directamente en `public_html/nova/`.
 
 **Excluido del deploy:**
-- Credenciales: `.env`
-- Documentación interna: `knowledge/`
-- Herramientas dev: `.claude/`, backups
-- Logs: `logs/`
+- `core/.env` — credenciales reales
+- `knowledge/` — documentación interna
+- `logs/` — logs locales
+- `CLAUDE.md`, `*.md`, `*.sql`
 
 ---
 
-## 7. ARCHIVOS QUE NUNCA SE MODIFICAN SIN AUTORIZACIÓN
+## 7. VOCABULARIO CONTROLADO (Nova Horizonte)
 
-- `knowledge/01_LEY_Y_MANDAMIENTOS.md` — Los Mandamientos son ley.
-- `.htaccess` — Blindaje crítico de seguridad.
-- `.env` — Credenciales de producción.
-- Schema de BD — Inmutabilidad del sistema.
+| ✅ USAR | ❌ PROHIBIDO |
+| :--- | :--- |
+| "Nos encargamos" | "Te ayudamos" |
+| "Coordinamos cada detalle" | "Organizamos" |
+| "Acceso exclusivo" | "Tour compartido" |
+| "Experiencia privada" | "Actividades" / "Tours" |
+| "Experiencias" (servicios) | "Productos" |
 
-## 8. ARCHIVOS QUE NUNCA SE SUBEN A GIT
+---
 
-- `.env` (cualquier variante real)
-- `info.txt`
-- `logs/` (directorio completo)
-- `backups/` (directorio completo)
-- Cualquier archivo con credenciales reales.
+## 8. BASE DE DATOS DE PRODUCCIÓN
+
+- **Host:** `localhost` (cPanel)
+- **Nombre:** `tourfindycom_nova_db`
+- **Usuario:** `tourfindycom_nova_db_user`
+- **Conexión:** SIEMPRE a través de `core/src/conexion.php` con PDO
 
 ---
 
@@ -177,4 +206,5 @@ Referencia completa: `knowledge/01_LEY_Y_MANDAMIENTOS.md`
 
 | Versión | Fecha | Cambio Principal |
 | :--- | :--- | :--- |
-| v1.0 | [FECHA_DE_INICIO] | Creación inicial del manual operativo |
+| v1.0 | 2026-04-03 | Creación inicial del manual operativo |
+| v1.1 | 2026-06-04 | Personalización completa para Nova Horizonte Tours. Fase 0–3 ejecutada por AXON_DCD. |

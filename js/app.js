@@ -7,6 +7,16 @@
 'use strict';
 
 /* ═══════════════════════════════════════════════════════════
+   0. SIGNATURE DETAIL — ICONOGRAFÍA SVG (sin emojis)
+═══════════════════════════════════════════════════════════ */
+const NH_SIG_ICONS = {
+  cold:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07M8 6l4-2 4 2M8 18l4 2 4-2M6 8l-2 4 2 4M18 8l2 4-2 4"/></svg>',
+  drink:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7M8 22h8M5 4h14l-2 6.5a5 5 0 0 1-10 0z"/><path d="M9 6h6"/></svg>',
+  music:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>',
+  thermo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>'
+};
+
+/* ═══════════════════════════════════════════════════════════
    1. DICCIONARIO BILINGÜE — VOCABULARIO CONTROLADO
 ═══════════════════════════════════════════════════════════ */
 const NH_LANG = {
@@ -42,6 +52,7 @@ const NH_LANG = {
     servDesc:  'Coordinamos cada detalle para que tu único trabajo sea disfrutar. Acceso exclusivo a las maravillas del Mundo.',
     servCta:   'Ver experiencia',
     servUpsellLabel: 'Mejoras VIP disponibles',
+    servPlayLabel: 'Reproducir vista previa',
 
     /* Servicios A–G */
     services: [
@@ -123,10 +134,10 @@ const NH_LANG = {
     sigTitle: 'Signature Detail™',
     sigDesc:  'La hospitalidad invisible que lo distingue todo.',
     sigItems: [
-      { icon: '🌿', text: 'Toalla fría aromatizada al primer contacto' },
-      { icon: '🥂', text: 'Bebida premium de bienvenida contextual' },
-      { icon: '🎵', text: 'Música ambiental sincronizada con el nivel VIP' },
-      { icon: '🌡️', text: 'Temperatura ideal coordinada con el clima local' }
+      { icon: NH_SIG_ICONS.cold,    text: 'Toalla fría aromatizada al primer contacto' },
+      { icon: NH_SIG_ICONS.drink,   text: 'Bebida premium de bienvenida contextual' },
+      { icon: NH_SIG_ICONS.music,   text: 'Música ambiental sincronizada con el nivel VIP' },
+      { icon: NH_SIG_ICONS.thermo,  text: 'Temperatura ideal coordinada con el clima local' }
     ],
 
     /* Trust */
@@ -177,6 +188,7 @@ const NH_LANG = {
     servDesc:  'We coordinate every detail so your only task is to enjoy. Exclusive access to the wonders of the world.',
     servCta:   'View experience',
     servUpsellLabel: 'VIP upgrades available',
+    servPlayLabel: 'Play preview',
 
     services: [
       {
@@ -256,10 +268,10 @@ const NH_LANG = {
     sigTitle: 'Signature Detail™',
     sigDesc:  'The invisible hospitality that sets everything apart.',
     sigItems: [
-      { icon: '🌿', text: 'Chilled aromatic towel at first contact' },
-      { icon: '🥂', text: 'Contextual premium welcome drink' },
-      { icon: '🎵', text: 'Ambient music synced to VIP level' },
-      { icon: '🌡️', text: 'Ideal temperature coordinated with local climate' }
+      { icon: NH_SIG_ICONS.cold,    text: 'Chilled aromatic towel at first contact' },
+      { icon: NH_SIG_ICONS.drink,   text: 'Contextual premium welcome drink' },
+      { icon: NH_SIG_ICONS.music,   text: 'Ambient music synced to VIP level' },
+      { icon: NH_SIG_ICONS.thermo,  text: 'Ideal temperature coordinated with local climate' }
     ],
 
     trust: [
@@ -282,16 +294,90 @@ const NH_LANG = {
 };
 
 /* ═══════════════════════════════════════════════════════════
-   2. STATE
+   2. MEDIA REGISTRY — activos visuales por experiencia
 ═══════════════════════════════════════════════════════════ */
-const NHState = {
-  lang:      localStorage.getItem('nh_lang')  || 'es',
-  theme:     localStorage.getItem('nh_theme') || 'dark',
-  listening: false
+const NH_CARD_MEDIA = {
+  maritime: {
+    poster: {
+      avif: 'assets/img/oceanic_command_aerial_pursuit.avif',
+      webp: 'assets/img/oceanic_command_aerial_pursuit.webp',
+      jpg:  'assets/img/oceanic_command_aerial_pursuit.jpg'
+    },
+    video: {
+      webm: 'assets/video/oceanic_command_expedition.webm',
+      mp4:  'assets/video/oceanic_command_expedition.mp4'
+    }
+  },
+  ground: {
+    poster: {
+      avif: 'assets/img/terralink_executive_jet_wing.avif',
+      webp: 'assets/img/terralink_executive_jet_wing.webp',
+      jpg:  'assets/img/terralink_executive_jet_wing.jpg'
+    },
+    video: {
+      webm: 'assets/video/VIP_ground_logistics.webm',
+      mp4:  'assets/video/VIP_ground_logistics.mp4'
+    }
+  },
+  nature: {
+    poster: {
+      avif: 'assets/img/terra_essence_cactus_overlook.avif',
+      webp: 'assets/img/terra_essence_cactus_overlook.webp',
+      jpg:  'assets/img/terra_essence_cactus_overlook.jpg'
+    },
+    video: {
+      webm: 'assets/video/terra_essence_hiking_aerial.webm',
+      mp4:  'assets/video/terra_essence_hiking_aerial.mp4'
+    }
+  },
+  equestrian: {
+    poster: {
+      avif: 'assets/img/equestrian_beach_silhouette.avif',
+      webp: 'assets/img/equestrian_beach_silhouette.webp',
+      jpg:  'assets/img/equestrian_beach_silhouette.jpg'
+    },
+    video: {
+      webm: 'assets/video/equestrian_horizon_sunset_aerial.webm',
+      mp4:  'assets/video/equestrian_horizon_sunset_aerial.mp4'
+    }
+  },
+  cultural: {
+    poster: {
+      avif: 'assets/img/legacy_immersion_malecon_sunset.avif',
+      webp: 'assets/img/legacy_immersion_malecon_sunset.webp',
+      jpg:  'assets/img/legacy_immersion_malecon_sunset.jpg'
+    },
+    video: {
+      webm: 'assets/video/Cultural_heritage.webm',
+      mp4:  'assets/video/Cultural_heritage.mp4'
+    }
+  },
+  concierge: {
+    poster: {
+      avif: 'assets/img/signature_orchestration_yacht_event.avif',
+      webp: 'assets/img/signature_orchestration_yacht_event.webp',
+      jpg:  'assets/img/signature_orchestration_yacht_event.jpg'
+    },
+    video: {
+      webm: 'assets/video/signature_orchestration_event.webm',
+      mp4:  'assets/video/signature_orchestration_event.mp4'
+    }
+  }
 };
 
 /* ═══════════════════════════════════════════════════════════
-   3. DOM CACHE
+   3. STATE
+═══════════════════════════════════════════════════════════ */
+const NHState = {
+  lang:          localStorage.getItem('nh_lang')  || 'es',
+  theme:         localStorage.getItem('nh_theme') || 'dark',
+  listening:     false,
+  auraListening: false,
+  auraSpeaker:   false
+};
+
+/* ═══════════════════════════════════════════════════════════
+   4. DOM CACHE
 ═══════════════════════════════════════════════════════════ */
 const $ = id => document.getElementById(id);
 const $$ = sel => document.querySelectorAll(sel);
@@ -306,6 +392,8 @@ function applyTheme(theme) {
   localStorage.setItem('nh_theme', theme);
   NHState.theme = theme;
   updateThemeIcon();
+  const logo = $('nh-navbar-logo');
+  if (logo) logo.src = theme === 'light' ? (logo.dataset.light || logo.src) : (logo.dataset.dark || logo.src);
 }
 
 function updateThemeIcon() {
@@ -398,12 +486,34 @@ function renderCards(lang) {
   const grid = $('nh-services-grid');
   if (!grid) return;
   const d = NH_LANG[lang];
-  grid.innerHTML = d.services.map((s, i) => `
+  grid.innerHTML = d.services.map((s, i) => {
+    const media = NH_CARD_MEDIA[s.id];
+    let mediaInner;
+    if (media) {
+      const { poster, video } = media;
+      mediaInner = `<div class="nh-card-media-wrap">
+        <picture class="nh-card-poster">
+          <source srcset="${poster.avif}" type="image/avif">
+          <source srcset="${poster.webp}" type="image/webp">
+          <img class="nh-card-media-img" src="${poster.jpg}" alt="" loading="lazy">
+        </picture>
+        <video class="nh-card-media-video" muted loop playsinline preload="none" poster="${poster.jpg}">
+          <source data-src="${video.webm}" type="video/webm">
+          <source data-src="${video.mp4}" type="video/mp4">
+        </video>
+        <button class="nh-card-play" type="button" aria-label="${d.servPlayLabel}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+        </button>
+      </div>`;
+    } else {
+      mediaInner = `<div class="nh-card-media-icon">${s.icon}</div>`;
+    }
+    return `
     <article class="nh-card nh-reveal" data-delay="${i + 1}" data-service="${s.id}"
              role="button" tabindex="0" aria-label="${s.title}"
              onclick="openModal('${s.id}','${lang}')">
       <div class="nh-card-media">
-        <div class="nh-card-media-icon">${s.icon}</div>
+        ${mediaInner}
         <div class="nh-card-media-overlay"></div>
         <span class="nh-card-tier">${s.tier}</span>
       </div>
@@ -423,10 +533,12 @@ function renderCards(lang) {
         </div>
       </div>
     </article>
-  `).join('');
+  `;
+  }).join('');
 
   /* Re-observe new cards */
   observeReveal();
+  observeCardMedia();
   bindCardKeys();
 }
 
@@ -564,7 +676,7 @@ function renderSignatureItems(lang) {
   const d = NH_LANG[lang];
   container.innerHTML = d.sigItems.map(item => `
     <div class="nh-signature-item nh-reveal">
-      <span>${item.icon}</span>
+      <span class="nh-sig-icon" aria-hidden="true">${item.icon}</span>
       <span>${item.text}</span>
     </div>
   `).join('');
@@ -640,6 +752,51 @@ function observeReveal() {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   11B. CARD MEDIA — DATA-SAVER LAZY LOADING
+═══════════════════════════════════════════════════════════ */
+let cardMediaObserver;
+
+function activateCardVideo(wrap) {
+  if (!wrap || wrap.classList.contains('is-active')) return;
+  const video = wrap.querySelector('.nh-card-media-video');
+  if (!video) return;
+  video.querySelectorAll('source[data-src]').forEach(source => {
+    source.src = source.dataset.src;
+    source.removeAttribute('data-src');
+  });
+  video.load();
+  video.play().catch(() => {});
+  wrap.classList.add('is-active');
+}
+
+function observeCardMedia() {
+  if (cardMediaObserver) cardMediaObserver.disconnect();
+
+  cardMediaObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (window.innerWidth >= 768) activateCardVideo(entry.target);
+        cardMediaObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  $$('.nh-card-media-wrap').forEach(el => cardMediaObserver.observe(el));
+}
+
+function bindCardPlayButtons() {
+  const grid = $('nh-services-grid');
+  if (!grid) return;
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('.nh-card-play');
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    activateCardVideo(btn.closest('.nh-card-media-wrap'));
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
    12. NAVBAR SCROLL EFFECT
 ═══════════════════════════════════════════════════════════ */
 function initNavbarScroll() {
@@ -669,15 +826,137 @@ function initChips() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   14. KEYBOARD & ACCESSIBILITY
+   14b. BACK TO TOP
+═══════════════════════════════════════════════════════════ */
+function initBackToTop() {
+  const btn = $('nh-back-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   14c. AURA — WIDGET FLOTANTE DE IA
+═══════════════════════════════════════════════════════════ */
+function initAura() {
+  const toggle = $('nh-aura-toggle');
+  const panel  = $('nh-aura-panel');
+  const close  = $('nh-aura-close');
+  const input  = $('nh-aura-input');
+  const send   = $('nh-aura-send');
+  const mic    = $('nh-aura-mic');
+  const spk    = $('nh-aura-spk');
+  if (!toggle || !panel) return;
+
+  const openPanel = () => {
+    panel.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    if (input) input.focus();
+  };
+
+  const closePanel = () => {
+    panel.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle.addEventListener('click', () => {
+    panel.classList.contains('open') ? closePanel() : openPanel();
+  });
+
+  if (close) close.addEventListener('click', closePanel);
+
+  if (send)  send.addEventListener('click', () => nhAuraSend());
+  if (input) input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); nhAuraSend(); }
+  });
+
+  if (mic) mic.addEventListener('click', nhAuraToggleMic);
+  if (spk) spk.addEventListener('click', nhAuraToggleSpk);
+
+  window.nhAuraClosePanel = closePanel;
+}
+
+function nhAuraSend() {
+  const input    = $('nh-aura-input');
+  const response = $('nh-aura-response');
+  if (!input || !response) return;
+
+  const text = input.value.trim().toLowerCase();
+  if (!text) return;
+
+  const d = NH_LANG[NHState.lang];
+  let reply = d.novaDefault;
+  if (/mar|ocean|buceo|snorkel|isla|maritime|sea|dive/i.test(text))             reply = NOVA_RESPONSES.maritime[NHState.lang];
+  if (/traslad|transporte|vuelo|aeropuert|transfer|flight|airport/i.test(text)) reply = NOVA_RESPONSES.transfer[NHState.lang];
+  if (/event|boda|celebra|yate|playa|beach|yacht|wedding/i.test(text))          reply = NOVA_RESPONSES.event[NHState.lang];
+  if (/atardecer|sunset|caballo|horse|ecuestr/i.test(text))                     reply = NOVA_RESPONSES.sunset[NHState.lang];
+
+  response.textContent = reply;
+  input.value = '';
+
+  if (NHState.auraSpeaker && 'speechSynthesis' in window) {
+    const utter = new SpeechSynthesisUtterance(reply);
+    utter.lang = NHState.lang === 'en' ? 'en-US' : 'es-MX';
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utter);
+  }
+}
+
+function nhAuraToggleMic() {
+  const btn   = $('nh-aura-mic');
+  const input = $('nh-aura-input');
+  if (!btn) return;
+
+  NHState.auraListening = !NHState.auraListening;
+  btn.classList.toggle('listening', NHState.auraListening);
+  btn.setAttribute('aria-label', NHState.auraListening ? NH_LANG[NHState.lang].novaListening : 'Activar voz');
+
+  if (NHState.auraListening) {
+    const d = NH_LANG[NHState.lang];
+    if (input) input.placeholder = d.novaListening;
+
+    setTimeout(() => {
+      NHState.auraListening = false;
+      btn.classList.remove('listening');
+      btn.setAttribute('aria-label', 'Activar voz');
+      if (input) {
+        input.placeholder = 'Escribe tu consulta...';
+        input.value = d.novaChip1;
+        nhAuraSend();
+      }
+    }, 2500);
+  }
+}
+
+function nhAuraToggleSpk() {
+  const btn = $('nh-aura-spk');
+  if (!btn) return;
+  NHState.auraSpeaker = !NHState.auraSpeaker;
+  btn.classList.toggle('active', NHState.auraSpeaker);
+  btn.setAttribute('aria-label', NHState.auraSpeaker ? 'Desactivar audio' : 'Activar audio');
+  if (!NHState.auraSpeaker && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   15. KEYBOARD & ACCESSIBILITY
 ═══════════════════════════════════════════════════════════ */
 function initKeyboard() {
-  /* Close modal on Escape */
+  /* Close modal / drawer / AURA on Escape */
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       const overlay = $('nh-modal-overlay');
       if (overlay && overlay.classList.contains('open')) closeModal();
       closeDrawer();
+      const aura = $('nh-aura-panel');
+      if (aura && aura.classList.contains('open') && window.nhAuraClosePanel) window.nhAuraClosePanel();
     }
   });
 
@@ -699,15 +978,18 @@ function initKeyboard() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   15. INIT
+   16. INIT
 ═══════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   applyTheme(NHState.theme);
   applyLang(NHState.lang);
   observeReveal();
+  bindCardPlayButtons();
   initNavbarScroll();
   initChips();
   initKeyboard();
+  initBackToTop();
+  initAura();
 
   /* Show Nova greeting on first focus */
   const novaInput = $('nh-nova-input');

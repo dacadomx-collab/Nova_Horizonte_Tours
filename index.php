@@ -6,11 +6,17 @@
   <meta name="description" content="Nova Horizonte — Logística y hospitalidad de ultra-lujo. Experiencias privadas en tierra, mar y cielo. La Paz, Baja California Sur.">
   <meta name="theme-color" content="#0B0C10">
 
+  <!-- Favicon Global — Mandamiento AXON_DCD: logo3.png inyectado en todas las páginas -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo3.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo3.png">
+  <link rel="apple-touch-icon"                    href="assets/img/logo3.png">
+  <link rel="shortcut icon"                       href="assets/img/logo3.png">
+
   <!-- Open Graph -->
   <meta property="og:title"       content="Nova Horizonte · Experiencias Privadas de Ultra-Lujo">
   <meta property="og:description" content="Coordinamos cada detalle. Acceso exclusivo. Cero estrés.">
   <meta property="og:type"        content="website">
-  <meta property="og:image"       content="../assets/img/logo1.png">
+  <meta property="og:image"       content="assets/img/logo1.png">
 
   <title>Nova Horizonte · Experiencias Privadas de Ultra-Lujo</title>
 
@@ -32,10 +38,13 @@
 
   <!-- Logo -->
   <a href="#nh-hero" aria-label="Nova Horizonte — Inicio">
-    <img src="../assets/img/logo1.png"
+    <img id="nh-navbar-logo"
+         src="assets/img/logo3.png"
          alt="Nova Horizonte Tours"
          class="nh-logo"
-         onerror="this.onerror=null; this.src='../assets/img/logo2.png';">
+         data-dark="assets/img/logo3.png"
+         data-light="assets/img/logo1.png"
+         onerror="this.onerror=null; this.src='assets/img/logo3.png';">
   </a>
 
   <!-- Desktop links -->
@@ -80,24 +89,12 @@
   </div>
 </nav>
 
-<!-- Mobile Drawer -->
+<!-- Mobile Drawer — Silent Luxury Menu -->
 <nav id="nh-drawer" role="navigation" aria-label="Menú móvil">
-  <a id="nh-drawer-experiences" class="nh-drawer-link" href="#nh-services"  onclick="nhCloseDrawer()">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-    Experiencias
-  </a>
-  <a id="nh-drawer-concierge"   class="nh-drawer-link" href="#nh-nova-bar"  onclick="nhCloseDrawer()">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    Concierge Nova
-  </a>
-  <a id="nh-drawer-about"       class="nh-drawer-link" href="#nh-footer"    onclick="nhCloseDrawer()">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    Nosotros
-  </a>
-  <a id="nh-drawer-contact"     class="nh-drawer-link" href="#nh-footer"    onclick="nhCloseDrawer()">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.4z"/></svg>
-    Contacto
-  </a>
+  <a id="nh-drawer-experiences" class="nh-drawer-link" href="#nh-services"  onclick="nhCloseDrawer()">Experiencias</a>
+  <a id="nh-drawer-concierge"   class="nh-drawer-link" href="#nh-nova-bar"  onclick="nhCloseDrawer()">Concierge Nova</a>
+  <a id="nh-drawer-about"       class="nh-drawer-link" href="#nh-footer"    onclick="nhCloseDrawer()">Nosotros</a>
+  <a id="nh-drawer-contact"     class="nh-drawer-link" href="#nh-footer"    onclick="nhCloseDrawer()">Contacto</a>
 </nav>
 
 
@@ -105,6 +102,15 @@
      HERO
 ════════════════════════════════════════════════════════ -->
 <section id="nh-hero" aria-label="Portada principal">
+  <video class="nh-hero-video"
+         autoplay
+         loop
+         muted
+         playsinline
+         poster="assets/img/main.png"
+         aria-hidden="true">
+    <source src="assets/video/main.mp4" type="video/mp4">
+  </video>
   <div class="nh-hero-bg" aria-hidden="true"></div>
 
   <div class="nh-hero-badge nh-reveal">
@@ -218,6 +224,20 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
+     VISUAL BREAK — PANORAMIC DIVIDER
+════════════════════════════════════════════════════════ -->
+<figure class="nh-visual-break" aria-hidden="true">
+  <picture>
+    <source srcset="assets/img/oceanic_command_horizon_cruise.avif" type="image/avif">
+    <source srcset="assets/img/oceanic_command_horizon_cruise.webp" type="image/webp">
+    <img src="assets/img/oceanic_command_horizon_cruise.jpg"
+         alt=""
+         loading="lazy">
+  </picture>
+</figure>
+
+
+<!-- ═══════════════════════════════════════════════════════
      SIGNATURE DETAIL™ — BANNER G
 ════════════════════════════════════════════════════════ -->
 <section id="nh-signature" aria-labelledby="nh-sig-title">
@@ -290,10 +310,10 @@
 ════════════════════════════════════════════════════════ -->
 <footer id="nh-footer" role="contentinfo">
 
-  <img src="../assets/img/logo2.png"
+  <img src="assets/img/logo2.png"
        alt="Nova Horizonte"
        class="nh-footer-logo"
-       onerror="this.onerror=null; this.src='../assets/img/logo1.png';">
+       onerror="this.onerror=null; this.src='assets/img/logo1.png';">
 
   <p id="nh-footer-tagline" class="nh-footer-tagline">
     "Cero estrés. Control absoluto. Experiencias impecables."
@@ -309,6 +329,60 @@
   <p id="nh-footer-copy"  class="nh-footer-copy"></p>
   <p id="nh-footer-copy2" class="nh-footer-copy"></p>
 </footer>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BACK TO TOP
+════════════════════════════════════════════════════════ -->
+<button id="nh-back-top" type="button" aria-label="Volver al inicio">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     AURA — ASISTENTE DE IA
+════════════════════════════════════════════════════════ -->
+<button id="nh-aura-toggle" type="button" aria-label="Abrir AURA" aria-expanded="false">
+  <span class="nh-aura-pulse" aria-hidden="true"></span>
+</button>
+
+<div id="nh-aura-panel" role="dialog" aria-label="Panel de AURA">
+  <div class="nh-aura-header">
+    <span class="nh-aura-orb" aria-hidden="true"></span>
+    <div class="nh-aura-header-text">
+      <p class="nh-aura-name">AURA</p>
+      <p class="nh-aura-status">Inteligencia Nova · En línea</p>
+    </div>
+    <button id="nh-aura-close" type="button" aria-label="Cerrar AURA">&times;</button>
+  </div>
+
+  <div class="nh-aura-body">
+    <p id="nh-aura-response" class="nh-aura-response">
+      Soy AURA. Pregúntame sobre tu próxima experiencia privada.
+    </p>
+
+    <div class="nh-aura-controls">
+      <input id="nh-aura-input"
+             type="text"
+             class="nh-aura-input"
+             placeholder="Escribe tu instrucción..."
+             autocomplete="off"
+             aria-label="Instrucción para AURA">
+
+      <button id="nh-aura-mic" class="nh-aura-btn" type="button" aria-label="Activar voz">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+      </button>
+
+      <button id="nh-aura-spk" class="nh-aura-btn" type="button" aria-label="Activar audio">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      </button>
+
+      <button id="nh-aura-send" class="nh-aura-send" type="button" aria-label="Enviar a AURA">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
 
 
 <!-- ═══════════════════════════════════════════════════════

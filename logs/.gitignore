@@ -1,0 +1,4 @@
+# Ignorar todos los archivos de log en este directorio
+*
+# Pero conservar este .gitignore para que Git rastree la carpeta
+!.gitignore
